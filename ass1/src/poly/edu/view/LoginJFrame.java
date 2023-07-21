@@ -137,8 +137,11 @@ public class LoginJFrame extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
     List<USERS> dn = user.GetAllUsers();
-   
- new QLSVJFrame().setVisible(true);
+        
+    
+         new QLSVJFrame().setVisible(true);    
+        setVisible(false);
+
 
      
 
