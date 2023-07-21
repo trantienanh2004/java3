@@ -12,28 +12,30 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import poly.edu.model.category;
+import poly.edu.model.USERS;
 import poly.edu.untitity.jdbcheper;
 
 /**
  *
  * @author HP
  */
-public class CategoryReponstory {
+public class usersReponstory {
 
-   public List<category> GetAllCategory(){
-       List<category> ct = new ArrayList<>();
-       String sql = "select * from category";
+   public List<USERS> GetAllUsers(){
+       List<USERS> dstk = new ArrayList<>();
+       String sql = "select * from USERS";
        ResultSet rs = jdbcheper.TruyVan(sql);
        try {
            while (rs.next()) {
-               Integer id = rs.getInt("id");
-               String name = rs.getString("name");
-               ct.add( new category(id, name));
+               String name = rs.getString("username");
+               String pass = rs.getString("password");
+               String role = rs.getString("role");
+               
+               dstk.add(new USERS(name , pass , role));
            }
        } catch (SQLException ex) {
-           Logger.getLogger(CategoryReponstory.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(usersReponstory.class.getName()).log(Level.SEVERE, null, ex);
        }
-       return ct;
+       return dstk;
    }
 }

@@ -5,6 +5,14 @@
  */
 package poly.edu.view;
 
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
+import poly.edu.model.grade;
+import poly.edu.model.students;
+import poly.edu.reponstory.gradeReponstory;
+import poly.edu.reponstory.studentsReponstory;
+
 /**
  *
  * @author HP
@@ -14,9 +22,18 @@ public class QLDSVJFrame extends javax.swing.JFrame {
     /**
      * Creates new form QLDSVJFrame
      */
+     gradeReponstory gradeReponstory = new gradeReponstory();
+    DefaultComboBoxModel<grade> modelCombo;
     public QLDSVJFrame() {
         initComponents();
         setLocationRelativeTo(null);
+        List<grade> grade = gradeReponstory.getallGrade();
+        modelCombo =(DefaultComboBoxModel) new DefaultComboBoxModel<>(grade.toArray());
+        loatdata();
+         if(tblQLDSSV.getRowCount() > 0){
+            tblQLDSSV.setRowSelectionInterval(0, 0);
+           mouclick();
+        }
     }
 
     /**
@@ -31,7 +48,7 @@ public class QLDSVJFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        txtMaSv = new javax.swing.JTextField();
+        txtTimMaSv = new javax.swing.JTextField();
         btnMaSv = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -41,12 +58,12 @@ public class QLDSVJFrame extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        txtMasv = new javax.swing.JTextField();
+        txtDiemTA = new javax.swing.JTextField();
+        txtDiemTin = new javax.swing.JTextField();
+        txtGDTC = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        lbiDiemTB = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         btnNew = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
@@ -84,7 +101,7 @@ public class QLDSVJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addGap(27, 27, 27)
-                .addComponent(txtMaSv, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTimMaSv, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63)
                 .addComponent(btnMaSv, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -94,7 +111,7 @@ public class QLDSVJFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtMaSv, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTimMaSv, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(btnMaSv, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(41, Short.MAX_VALUE))
@@ -119,9 +136,9 @@ public class QLDSVJFrame extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel9.setText("Điểm TB:");
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(51, 51, 255));
-        jLabel10.setText("0.0");
+        lbiDiemTB.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        lbiDiemTB.setForeground(new java.awt.Color(51, 51, 255));
+        lbiDiemTB.setText("0.0");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -157,21 +174,21 @@ public class QLDSVJFrame extends javax.swing.JFrame {
                         .addGap(309, 309, 309))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField3)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtDiemTA)
+                            .addComponent(txtMasv)
+                            .addComponent(txtDiemTin)
+                            .addComponent(txtGDTC, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(28, 28, 28)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel9)
                                 .addGap(40, 40, 40))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel10)
+                                .addComponent(lbiDiemTB)
                                 .addGap(64, 64, 64))))))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextField1, jTextField2, jTextField3, jTextField4});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtDiemTA, txtDiemTin, txtGDTC, txtMasv});
 
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,13 +197,13 @@ public class QLDSVJFrame extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(81, 81, 81)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMasv, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtDiemTA, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel6))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
@@ -195,12 +212,12 @@ public class QLDSVJFrame extends javax.swing.JFrame {
                             .addComponent(lbiHoTen))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbiDiemTB)
+                    .addComponent(txtDiemTin, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtGDTC, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
@@ -257,7 +274,7 @@ public class QLDSVJFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mã SV", "Họ Tên", "Tiếng Anh", "Tin Học", "GDTC", "Điểm TB"
+                "ID", "Mã sv", "Tiếng anh", "Tin Học", "GDTC", "Điểm TB"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -266,6 +283,11 @@ public class QLDSVJFrame extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblQLDSSV.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblQLDSSVMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblQLDSSV);
@@ -354,6 +376,10 @@ public class QLDSVJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tblQLDSSVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblQLDSSVMouseClicked
+mouclick();
+    }//GEN-LAST:event_tblQLDSSVMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -400,7 +426,6 @@ public class QLDSVJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -415,12 +440,47 @@ public class QLDSVJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JLabel lbiDiemTB;
     private javax.swing.JLabel lbiHoTen;
     private javax.swing.JTable tblQLDSSV;
-    private javax.swing.JTextField txtMaSv;
+    private javax.swing.JTextField txtDiemTA;
+    private javax.swing.JTextField txtDiemTin;
+    private javax.swing.JTextField txtGDTC;
+    private javax.swing.JTextField txtMasv;
+    private javax.swing.JTextField txtTimMaSv;
     // End of variables declaration//GEN-END:variables
+
+    private void loatdata() {
+        DefaultTableModel dtm = (DefaultTableModel) this.tblQLDSSV.getModel();
+        dtm.getRowCount();
+        List<grade> grade = gradeReponstory.getallGrade();
+        for (grade object : grade ) {
+            Object[] obj ={
+                object.getId(),
+               // object.getHoTen(),
+                object.getMasv(),
+                object.getTienganh(),
+                object.getTinhoc(),
+                object.getGdtc()
+           
+            };
+            dtm.addRow(obj);
+        }
+    }
+
+    private void mouclick() {
+        int row = this.tblQLDSSV.getSelectedRow();
+        if(row == -1){
+            return;
+        }
+        txtMasv.setText(tblQLDSSV.getValueAt(row, 0).toString());
+        lbiHoTen.setText(tblQLDSSV.getValueAt(row, 1).toString());
+        txtDiemTA.setText(tblQLDSSV.getValueAt(row, 1).toString());
+       txtDiemTin.setText(tblQLDSSV.getValueAt(row, 2).toString());
+      txtGDTC.setText(tblQLDSSV.getValueAt(row, 3).toString());
+       
+       //double tong = new Double((tblQLDSSV.getValueAt(row, 1).toString() + (tblQLDSSV.getValueAt(row, 3).toString()) + (tblQLDSSV.getValueAt(row, 4).toString())) ) ;
+     // String kq = (String.valueOf(tong)) ;
+     // lbiDiemTB.setText(kq);
+    }
 }

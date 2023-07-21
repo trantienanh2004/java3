@@ -5,18 +5,24 @@
  */
 package poly.edu.view;
 
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import poly.edu.model.USERS;
+import poly.edu.reponstory.usersReponstory;
+
 /**
  *
  * @author HP
  */
 public class LoginJFrame extends javax.swing.JFrame {
-
-    /**
-     * Creates new form LoginJFrame
-     */
+    DefaultComboBoxModel<USERS> model;
+    usersReponstory user = new usersReponstory();
+    
     public LoginJFrame() {
         initComponents();
         setLocationRelativeTo(null);
+        List<USERS> dn = user.GetAllUsers();
+        model =(DefaultComboBoxModel) new DefaultComboBoxModel<>(dn.toArray());
     }
 
     /**
@@ -37,7 +43,7 @@ public class LoginJFrame extends javax.swing.JFrame {
         btnCannel = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Login");
 
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -48,6 +54,11 @@ public class LoginJFrame extends javax.swing.JFrame {
         jLabel3.setText("Password");
 
         btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
 
         btnCannel.setText("Cannel");
 
@@ -123,6 +134,15 @@ public class LoginJFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+    List<USERS> dn = user.GetAllUsers();
+   
+ new QLSVJFrame().setVisible(true);
+
+     
+
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
      * @param args the command line arguments

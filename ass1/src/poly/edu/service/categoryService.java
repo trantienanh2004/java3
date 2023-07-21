@@ -6,21 +6,21 @@
 package poly.edu.service;
 
 import java.util.List;
-import poly.edu.model.category;
-import poly.edu.reponstory.CategoryReponstory;
+import poly.edu.model.USERS;
+import poly.edu.reponstory.usersReponstory;
 
 /**
  *
  * @author HP
  */
 public class categoryService {
-    private final CategoryReponstory categoryReponstory;
+    private final usersReponstory categoryReponstory;
 
     public categoryService() {
-        this.categoryReponstory = new CategoryReponstory();
+        this.categoryReponstory = new usersReponstory();
     }
     
-    public List<category> getallcategory(){
+    public List<USERS> getallcategory(){
         return categoryReponstory.GetAllCategory();
     }
 }

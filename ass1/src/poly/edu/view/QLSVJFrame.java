@@ -5,6 +5,14 @@
  */
 package poly.edu.view;
 
+import java.util.ArrayList;
+import java.util.List;
+import javafx.scene.shape.SVGPath;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
+import poly.edu.model.students;
+import poly.edu.reponstory.studentsReponstory;
+
 /**
  *
  * @author HP
@@ -14,9 +22,20 @@ public class QLSVJFrame extends javax.swing.JFrame {
     /**
      * Creates new form QLSVJFrame
      */
+    studentsReponstory students = new studentsReponstory();
+    DefaultComboBoxModel<students> modelcombo;
+    
+    
     public QLSVJFrame() {
         initComponents();
         setLocationRelativeTo(null);
+        List<students> sv = students.getallStudents();
+        modelcombo =(DefaultComboBoxModel) new DefaultComboBoxModel<>(sv.toArray());
+        dtm();
+       if(tblQLSV.getRowCount() > 0){
+           tblQLSV.setRowSelectionInterval(0, 0);
+           mouclick();
+       }
     }
 
     /**
@@ -28,6 +47,7 @@ public class QLSVJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -72,8 +92,11 @@ public class QLSVJFrame extends javax.swing.JFrame {
 
         jLabel7.setText("Địa Chỉ:");
 
+        buttonGroup1.add(rdoNam);
+        rdoNam.setSelected(true);
         rdoNam.setText("Nam");
 
+        buttonGroup1.add(rdoNu);
         rdoNu.setText("Nữ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -233,6 +256,11 @@ public class QLSVJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblQLSV.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblQLSVMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblQLSV);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -289,6 +317,10 @@ public class QLSVJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tblQLSVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblQLSVMouseClicked
+        mouclick();
+    }//GEN-LAST:event_tblQLSVMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -329,6 +361,7 @@ public class QLSVJFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnNew;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -351,4 +384,42 @@ public class QLSVJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField txtMaSV;
     private javax.swing.JTextField txtSoDT;
     // End of variables declaration//GEN-END:variables
+
+    private void dtm() {
+        DefaultTableModel dtm = (DefaultTableModel) this.tblQLSV.getModel();
+        dtm.setRowCount(0);
+        List<students> sv = students.getallStudents();
+        for (students object : sv) {
+            Object [] obj = {
+                object.getMasv(),
+                object.getHoten(),
+                object.getEmail(),
+                object.getSodt(),
+                object.getGioitinh(),
+                object.getDiachi(),
+                object.getHinh(),
+                
+            };
+            dtm.addRow(obj);
+        }
+    }
+     private void mouclick() {
+        int row = this.tblQLSV.getSelectedRow();
+        if(row == -1){
+            return;
+        }
+        txtMaSV.setText(tblQLSV.getValueAt(row, 0).toString());
+        txtHoTen.setText(tblQLSV.getValueAt(row, 1).toString());
+        txtEmail .setText(tblQLSV.getValueAt(row, 2).toString());
+        
+        int x = (int) tblQLSV.getValueAt(row,4);
+        if(x == 0){
+            rdoNam.setSelected(true);
+        }else {
+             rdoNu.setSelected(true);
+        }
+        txtSoDT.setText(tblQLSV.getValueAt(row,3).toString());
+        txtDiaChi.setText(tblQLSV.getValueAt(row,5).toString());
+        
+    }
 }

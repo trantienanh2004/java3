@@ -6,23 +6,23 @@
 package poly.edu.service;
 
 import java.util.List;
-import poly.edu.model.product;
-import poly.edu.reponstory.productReponstory;
+import poly.edu.model.students;
+import poly.edu.reponstory.studentsReponstory;
 
 /**
  *
  * @author HP
  */
 public class productService {
-    private final productReponstory prodReponstory;
+    private final studentsReponstory prodReponstory;
 
     public productService() {
-        this.prodReponstory = new productReponstory();
+        this.prodReponstory = new studentsReponstory();
     }
 
    
     
-    public List<product> getallproduct(){
+    public List<students> getallproduct(){
         return prodReponstory.getallproduct();
     }
 }
