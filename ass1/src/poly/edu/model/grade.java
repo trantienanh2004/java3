@@ -11,7 +11,7 @@ package poly.edu.model;
  */
 public class grade {
     private int id ;
-   // private String HoTen ;
+    private String HoTen ;
     private String masv ;
     private String tienganh ;
     private String tinhoc ;
@@ -20,23 +20,16 @@ public class grade {
     public grade() {
     }
 
-    public grade(int id, /*String HoTen,*/ String masv, String tienganh, String tinhoc, String gdtc) {
+    public grade(int id, String HoTen, String masv, String tienganh, String tinhoc, String gdtc) {
         this.id = id;
-      //  this.HoTen = HoTen;
+        this.HoTen = HoTen;
         this.masv = masv;
         this.tienganh = tienganh;
         this.tinhoc = tinhoc;
         this.gdtc = gdtc;
     }
 
-    public grade(int id, students hoten, String masv, String tienganh, String tinhoc, String gdtc) {
-         this.id = id;
-       // this.HoTen = HoTen;
-        this.masv = masv;
-        this.tienganh = tienganh;
-        this.tinhoc = tinhoc;
-        this.gdtc = gdtc;
-    }
+ 
 
     
     
@@ -48,14 +41,14 @@ public class grade {
         this.id = id;
     }
 
-  /*  public String getHoTen() {
+   public String getHoTen() {
         return HoTen;
     }
 
     public void setHoTen(String HoTen) {
         this.HoTen = HoTen;
     }
-*/
+
 
     public String getMasv() {
         return masv;
@@ -87,6 +80,10 @@ public class grade {
 
     public void setGdtc(String gdtc) {
         this.gdtc = gdtc;
+    }
+
+    public Object getdiemtb() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     

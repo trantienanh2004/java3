@@ -5,6 +5,7 @@
 package poly.edu;
 
 import poly.edu.view.LoginJFrame;
+import poly.edu.view.loadingJFrame;
 
 
 
@@ -14,6 +15,6 @@ import poly.edu.view.LoginJFrame;
  */
 public class application {
     public static void main(String[] args) {
-        new LoginJFrame().setVisible(true);
+        new loadingJFrame().setVisible(true);
     }
 }

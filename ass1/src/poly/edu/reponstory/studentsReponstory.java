@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import poly.edu.model.USERS;
+import poly.edu.model.grade;
 import poly.edu.model.students;
 import poly.edu.untitity.jdbcheper;
 
@@ -22,7 +23,7 @@ import poly.edu.untitity.jdbcheper;
 public class studentsReponstory {
     public  List<students> getallStudents(){
         List<students> dssv = new ArrayList<>();
-        String sql = "SELECT * FROM STUDENTS join GRADE on students.masv = GRADE.masv ";
+        String sql = "SELECT * FROM STUDENTS  ";
         ResultSet rs = jdbcheper.TruyVan(sql);
         try {
             while (rs.next()) {
@@ -41,5 +42,12 @@ public class studentsReponstory {
             ex.printStackTrace();
         }
         return dssv;
+    }
+    
+    
+     public Integer addQLSV( students sv){
+        String spl ="insert into STUDENTS values (?,?,?,?,?,?,?)";
+        Integer row = jdbcheper.TruyVancapnhat(spl, sv.getMasv(),sv.getHoten(),sv.getEmail(),sv.getSodt(),sv.getGioitinh(),sv.getDiachi(),sv.getHinh());
+        return row;
     }
 }

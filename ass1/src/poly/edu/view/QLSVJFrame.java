@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.shape.SVGPath;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import poly.edu.model.students;
 import poly.edu.reponstory.studentsReponstory;
@@ -197,6 +198,11 @@ public class QLSVJFrame extends javax.swing.JFrame {
 
         btnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/edu/icon/Add.png"))); // NOI18N
         btnNew.setText("New");
+        btnNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewActionPerformed(evt);
+            }
+        });
 
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/edu/icon/Delete.png"))); // NOI18N
         btnDelete.setText("Delete");
@@ -272,7 +278,7 @@ public class QLSVJFrame extends javax.swing.JFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -311,7 +317,7 @@ public class QLSVJFrame extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(46, 46, 46))
         );
 
         pack();
@@ -320,6 +326,17 @@ public class QLSVJFrame extends javax.swing.JFrame {
     private void tblQLSVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblQLSVMouseClicked
         mouclick();
     }//GEN-LAST:event_tblQLSVMouseClicked
+
+    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
+        students sv = them();
+        studentsReponstory studenReponstory  =new studentsReponstory();
+        if(studenReponstory.addQLSV(sv) != null){
+            JOptionPane.showMessageDialog(this, "thêm thành công");
+        }else{
+            JOptionPane.showMessageDialog(this, "thêm thất bại");
+        }
+        dtm();
+    }//GEN-LAST:event_btnNewActionPerformed
 
     /**
      * @param args the command line arguments
@@ -422,4 +439,21 @@ public class QLSVJFrame extends javax.swing.JFrame {
         txtDiaChi.setText(tblQLSV.getValueAt(row,5).toString());
         
     }
+     private students them(){
+         students sv = new students();
+         
+         sv.setMasv(txtMaSV.getText());
+         sv.setHoten(txtHoTen.getText());
+         sv.setEmail(txtEmail.getText());
+        
+         sv.setSodt(Integer.valueOf(txtSoDT.getText()));
+         sv.setDiachi(txtDiaChi.getText());
+        if(rdoNam.isSelected() == true){
+            sv.setGioitinh(0);
+        }else{
+            sv.setGioitinh(1);
+        }
+         sv.setHinh(txtHoTen.getText());
+         return sv;
+     }
 }

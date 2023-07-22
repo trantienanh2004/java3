@@ -26,12 +26,12 @@ public class gradeReponstory {
         try {
             while (rs.next()) {                
       int id = rs.getInt(1) ;
-     
+     String hoten = rs.getString("hoten");
      String masv = rs.getString(2) ;
      String tienganh = rs.getString(3) ;
      String tinhoc = rs.getString(4) ;
      String gdtc= rs.getString(5) ;
-     dsdiem.add(new grade(id, masv, tienganh, tinhoc, gdtc));
+     dsdiem.add(new grade(id, masv, hoten, tienganh, tinhoc, gdtc));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -40,4 +40,11 @@ public class gradeReponstory {
         
         return dsdiem;
 }
+    
+    
+    
+//    public Integer addGrade( grade gr){
+//        String spl ="insert into grade values (?,?,?)";
+//        
+//    }
 }

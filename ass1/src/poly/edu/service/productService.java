@@ -13,16 +13,16 @@ import poly.edu.reponstory.studentsReponstory;
  *
  * @author HP
  */
-public class productService {
-    private final studentsReponstory prodReponstory;
-
-    public productService() {
-        this.prodReponstory = new studentsReponstory();
-    }
+//public class productService {
+//    private final studentsReponstory prodReponstory;
+//
+//    public productService() {
+//        this.prodReponstory = new studentsReponstory();
+//    }
 
    
     
-    public List<students> getallproduct(){
-        return prodReponstory.getallproduct();
-    }
-}
+//    public List<students> getallproduct(){
+//        return prodReponstory.getallproduct();
+//    }
+//}

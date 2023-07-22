@@ -27,11 +27,11 @@ public class usersReponstory {
        ResultSet rs = jdbcheper.TruyVan(sql);
        try {
            while (rs.next()) {
-               String name = rs.getString("username");
-               String pass = rs.getString("password");
-               String role = rs.getString("role");
+               String name = rs.getString(1);
+               String pass = rs.getString(2);
+               String role = rs.getString(3);
                
-               dstk.add(new USERS(name , pass , role));
+               dstk.add(new USERS(pass , name , role));
            }
        } catch (SQLException ex) {
            Logger.getLogger(usersReponstory.class.getName()).log(Level.SEVERE, null, ex);

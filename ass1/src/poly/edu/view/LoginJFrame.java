@@ -7,6 +7,7 @@ package poly.edu.view;
 
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import poly.edu.model.USERS;
 import poly.edu.reponstory.usersReponstory;
 
@@ -15,14 +16,15 @@ import poly.edu.reponstory.usersReponstory;
  * @author HP
  */
 public class LoginJFrame extends javax.swing.JFrame {
+
     DefaultComboBoxModel<USERS> model;
     usersReponstory user = new usersReponstory();
-    
+
     public LoginJFrame() {
         initComponents();
         setLocationRelativeTo(null);
         List<USERS> dn = user.GetAllUsers();
-        model =(DefaultComboBoxModel) new DefaultComboBoxModel<>(dn.toArray());
+        model = (DefaultComboBoxModel) new DefaultComboBoxModel<>(dn.toArray());
     }
 
     /**
@@ -37,7 +39,7 @@ public class LoginJFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        UserPassword = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JTextField();
         txtUserName = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
         btnCannel = new javax.swing.JButton();
@@ -61,6 +63,11 @@ public class LoginJFrame extends javax.swing.JFrame {
         });
 
         btnCannel.setText("Cannel");
+        btnCannel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCannelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -77,12 +84,12 @@ public class LoginJFrame extends javax.swing.JFrame {
                         .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCannel, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(UserPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(59, 59, 59))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {UserPassword, txtUserName});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtPassword, txtUserName});
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCannel, btnLogin});
 
@@ -96,7 +103,7 @@ public class LoginJFrame extends javax.swing.JFrame {
                 .addGap(39, 39, 39)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(UserPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -104,7 +111,7 @@ public class LoginJFrame extends javax.swing.JFrame {
                 .addGap(41, 41, 41))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {UserPassword, txtUserName});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtPassword, txtUserName});
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCannel, btnLogin});
 
@@ -136,16 +143,58 @@ public class LoginJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-    List<USERS> dn = user.GetAllUsers();
-        
-    
-         new QLSVJFrame().setVisible(true);    
-        setVisible(false);
+        List<USERS> dn = user.GetAllUsers();
+//        if (txtUserName.getText().equalsIgnoreCase(dn.get(0).getUsername()) ) {
+//            
+//                new QLDSVJFrame().setVisible(true);
+//                setVisible(false);
+//            
+//        } else if (txtUserName.getText().equalsIgnoreCase(dn.get(2).getUsername()) ) {
+//            if (txtUserName.getText().equalsIgnoreCase(dn.get(2).getPassword()) ) {
+//                new QLSVJFrame().setVisible(true);
+//                setVisible(false);
+//            }
+//        } else {
+//            JOptionPane.showMessageDialog(this, "nhập sai vui lòng nhập lại");
+//        }
 
+//test 
+        boolean check = false;
+        for (int i = 0; i < dn.size(); i++) {
+            if (txtUserName.getText().equalsIgnoreCase(dn.get(i).getUsername()) && txtPassword.getText().equalsIgnoreCase(dn.get(i).getPassword())) {
+                check = true;
+                int vt = i;
+                if (dn.get(vt).getRole().equalsIgnoreCase("giang vien")) {
+                    new QLDSVJFrame().setVisible(true);
+                    setVisible(false);
+                    break;
+                } else {
+                    new QLSVJFrame().setVisible(true);
+                    setVisible(false);
+                }
+                break;
+            }
+        }
+        if (!check) {
+            JOptionPane.showMessageDialog(this, "tài khoản hoặc mật khẩu sai vui lòng nhập lại");
+        }
 
-     
+//        System.out.println("" + dn.get(0).getRole());
+//if(dn.get(0).getRole().equalsIgnoreCase("giang vien")){
+//    System.out.println("d");
+//}else{
+//    System.out.println("s");
+//}
 
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void btnCannelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCannelActionPerformed
+        int tron = JOptionPane.showConfirmDialog(this, "thoát", "bạn có muốn thoát hay không ?", JOptionPane.YES_NO_OPTION);
+
+        if (tron == 0) {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_btnCannelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,13 +232,13 @@ public class LoginJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField UserPassword;
     private javax.swing.JButton btnCannel;
     private javax.swing.JButton btnLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables
 }
