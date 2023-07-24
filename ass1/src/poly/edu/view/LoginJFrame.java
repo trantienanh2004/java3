@@ -23,6 +23,7 @@ public class LoginJFrame extends javax.swing.JFrame {
     public LoginJFrame() {
         initComponents();
         setLocationRelativeTo(null);
+        setResizable(false);
         List<USERS> dn = user.GetAllUsers();
         model = (DefaultComboBoxModel) new DefaultComboBoxModel<>(dn.toArray());
     }

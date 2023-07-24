@@ -11,7 +11,9 @@ import javafx.scene.shape.SVGPath;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import poly.edu.model.grade;
 import poly.edu.model.students;
+import poly.edu.reponstory.gradeReponstory;
 import poly.edu.reponstory.studentsReponstory;
 
 /**
@@ -25,18 +27,18 @@ public class QLSVJFrame extends javax.swing.JFrame {
      */
     studentsReponstory students = new studentsReponstory();
     DefaultComboBoxModel<students> modelcombo;
-    
-    
+
     public QLSVJFrame() {
         initComponents();
+        setResizable(false);
         setLocationRelativeTo(null);
         List<students> sv = students.getallStudents();
-        modelcombo =(DefaultComboBoxModel) new DefaultComboBoxModel<>(sv.toArray());
+        modelcombo = (DefaultComboBoxModel) new DefaultComboBoxModel<>(sv.toArray());
         dtm();
-       if(tblQLSV.getRowCount() > 0){
-           tblQLSV.setRowSelectionInterval(0, 0);
-           mouclick();
-       }
+        if (tblQLSV.getRowCount() > 0) {
+            tblQLSV.setRowSelectionInterval(0, 0);
+            mouclick();
+        }
     }
 
     /**
@@ -74,6 +76,11 @@ public class QLSVJFrame extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblQLSV = new javax.swing.JTable();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -206,12 +213,22 @@ public class QLSVJFrame extends javax.swing.JFrame {
 
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/edu/icon/Delete.png"))); // NOI18N
         btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/edu/icon/Save.png"))); // NOI18N
         btnSave.setText("Save");
 
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/edu/icon/Edit.png"))); // NOI18N
         btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -282,6 +299,33 @@ public class QLSVJFrame extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        jMenu1.setText("File");
+
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/edu/icon/Disconnect.png"))); // NOI18N
+        jMenuItem1.setText("đăng xuất");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/edu/icon/Delete.png"))); // NOI18N
+        jMenuItem2.setText("exit");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -329,14 +373,62 @@ public class QLSVJFrame extends javax.swing.JFrame {
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
         students sv = them();
-        studentsReponstory studenReponstory  =new studentsReponstory();
-        if(studenReponstory.addQLSV(sv) != null){
+        studentsReponstory studenReponstory = new studentsReponstory();
+        if (studenReponstory.addQLSV(sv) != null) {
             JOptionPane.showMessageDialog(this, "thêm thành công");
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "thêm thất bại");
         }
         dtm();
+
+
     }//GEN-LAST:event_btnNewActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        Integer row = this.tblQLSV.getSelectedRow();
+        if (row == -1) {
+            return;
+        }
+        students sv = them();
+        String vt = vitricansua();
+        sv.setMasv(vt);
+        studentsReponstory stReponstory = new studentsReponstory();
+        if (stReponstory.UPDATEQLSV(sv) != null) {
+            JOptionPane.showMessageDialog(this, "sửa thành công");
+        } else {
+            JOptionPane.showMessageDialog(this, "sửa thất bại");
+        }
+        dtm();
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int tron = JOptionPane.showConfirmDialog(this, "bạn có chắc muốn xóa không", "nhắc nhở !", JOptionPane.YES_NO_OPTION);
+        if (tron == 0) {
+            students sv = them();
+            studentsReponstory sReponstory = new studentsReponstory();
+            if (sReponstory.DELETESTUDENTS(sv) != null) {
+                JOptionPane.showMessageDialog(this, "xóa thành công");
+                dtm();
+            } else {
+                JOptionPane.showMessageDialog(this, "xóa thất bại");
+            }
+
+        } else {
+            return;
+        }
+
+
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+     new LoginJFrame().setVisible(true);
+        setVisible(false);
+        JOptionPane.showMessageDialog(this, "đăng xuất thành công !");
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+       System.exit(0);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -386,6 +478,11 @@ public class QLSVJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -407,53 +504,60 @@ public class QLSVJFrame extends javax.swing.JFrame {
         dtm.setRowCount(0);
         List<students> sv = students.getallStudents();
         for (students object : sv) {
-            Object [] obj = {
+            Object[] obj = {
                 object.getMasv(),
                 object.getHoten(),
                 object.getEmail(),
                 object.getSodt(),
                 object.getGioitinh(),
                 object.getDiachi(),
-                object.getHinh(),
-                
-            };
+                object.getHinh(),};
             dtm.addRow(obj);
         }
     }
-     private void mouclick() {
+
+    private void mouclick() {
         int row = this.tblQLSV.getSelectedRow();
-        if(row == -1){
+        if (row == -1) {
             return;
         }
         txtMaSV.setText(tblQLSV.getValueAt(row, 0).toString());
         txtHoTen.setText(tblQLSV.getValueAt(row, 1).toString());
-        txtEmail .setText(tblQLSV.getValueAt(row, 2).toString());
-        
-        int x = (int) tblQLSV.getValueAt(row,4);
-        if(x == 0){
+        txtEmail.setText(tblQLSV.getValueAt(row, 2).toString());
+
+        int x = (int) tblQLSV.getValueAt(row, 4);
+        if (x == 0) {
             rdoNam.setSelected(true);
-        }else {
-             rdoNu.setSelected(true);
+        } else {
+            rdoNu.setSelected(true);
         }
-        txtSoDT.setText(tblQLSV.getValueAt(row,3).toString());
-        txtDiaChi.setText(tblQLSV.getValueAt(row,5).toString());
-        
+        txtSoDT.setText(tblQLSV.getValueAt(row, 3).toString());
+        txtDiaChi.setText(tblQLSV.getValueAt(row, 5).toString());
+
     }
-     private students them(){
-         students sv = new students();
-         
-         sv.setMasv(txtMaSV.getText());
-         sv.setHoten(txtHoTen.getText());
-         sv.setEmail(txtEmail.getText());
-        
-         sv.setSodt(Integer.valueOf(txtSoDT.getText()));
-         sv.setDiachi(txtDiaChi.getText());
-        if(rdoNam.isSelected() == true){
+
+    private students them() {
+        students sv = new students();
+
+        sv.setMasv(txtMaSV.getText());
+        sv.setHoten(txtHoTen.getText());
+        sv.setEmail(txtEmail.getText());
+
+        sv.setSodt(Integer.valueOf(txtSoDT.getText()));
+        sv.setDiachi(txtDiaChi.getText());
+        if (rdoNam.isSelected() == true) {
             sv.setGioitinh(0);
-        }else{
+        } else {
             sv.setGioitinh(1);
         }
-         sv.setHinh(txtHoTen.getText());
-         return sv;
-     }
+        sv.setHinh(txtHoTen.getText());
+        return sv;
+    }
+
+    public String vitricansua() {
+
+        Integer row = this.tblQLSV.getSelectedRow();
+        String vt = (String) tblQLSV.getValueAt(row, 0);
+        return vt;
+    }
 }

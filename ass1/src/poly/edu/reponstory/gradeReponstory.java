@@ -24,14 +24,20 @@ public class gradeReponstory {
     String sql = "select * from grade join students on grade.masv = students.masv";
         ResultSet rs = jdbcheper.TruyVan(sql);
         try {
-            while (rs.next()) {                
+            while (rs.next()) {       
+                grade g = new grade();
       int id = rs.getInt(1) ;
      String hoten = rs.getString("hoten");
      String masv = rs.getString(2) ;
      String tienganh = rs.getString(3) ;
      String tinhoc = rs.getString(4) ;
      String gdtc= rs.getString(5) ;
-     dsdiem.add(new grade(id, masv, hoten, tienganh, tinhoc, gdtc));
+      double diem = Double.parseDouble(tienganh);
+    double diem1 = Double.parseDouble(tinhoc);
+    double diem2 = Double.parseDouble(gdtc);
+    double tong = (diem+diem1+diem2)/3;
+     double diemtb = Math.round(tong * 10) / 10.0;
+     dsdiem.add(new grade(id, masv, hoten, tienganh, tinhoc, gdtc,diemtb));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -43,8 +49,22 @@ public class gradeReponstory {
     
     
     
-//    public Integer addGrade( grade gr){
-//        String spl ="insert into grade values (?,?,?)";
-//        
-//    }
+    public Integer addGrade( grade gr){
+      String spl ="EXEC DL_GRADE ?,?,?,?";
+        Integer row = jdbcheper.TruyVancapnhat(spl,gr.getMasv(),gr.getTienganh(),gr.getTinhoc(),gr.getGdtc());
+      return row;
+    }
+    
+      public Integer UpdateGrade( grade gr){
+      String spl ="update GRADE \n" +
+"set  MASV = ?, TIENGANH =?, TINHOC  =? ,GDTC  = ?\n" +
+"WHERE ID = ?";
+        Integer row = jdbcheper.TruyVancapnhat(spl,gr.getMasv(),gr.getTienganh(),gr.getTinhoc(),gr.getGdtc(),gr.getId());
+      return row;
+    }
+      public Integer DELETEgrade( grade gr){
+      String spl ="EXEC XOA ?";
+        Integer row = jdbcheper.TruyVancapnhat(spl,gr.getMasv());
+      return row;
+    }
 }

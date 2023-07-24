@@ -7,6 +7,7 @@ package poly.edu.view;
 
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import poly.edu.model.grade;
 import poly.edu.model.students;
@@ -26,6 +27,7 @@ public class QLDSVJFrame extends javax.swing.JFrame {
     DefaultComboBoxModel<grade> modelCombo;
     public QLDSVJFrame() {
         initComponents();
+        setResizable(false);
         setLocationRelativeTo(null);
         List<grade> grade = gradeReponstory.getallGrade();
         modelCombo =(DefaultComboBoxModel) new DefaultComboBoxModel<>(grade.toArray());
@@ -79,9 +81,8 @@ public class QLDSVJFrame extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
-        jMenu6 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -233,15 +234,30 @@ public class QLDSVJFrame extends javax.swing.JFrame {
 
         btnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/edu/icon/Add.png"))); // NOI18N
         btnNew.setText("New");
+        btnNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewActionPerformed(evt);
+            }
+        });
 
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/edu/icon/Save.png"))); // NOI18N
         btnSave.setText("Save");
 
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/edu/icon/Delete.png"))); // NOI18N
         btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/edu/icon/Edit.png"))); // NOI18N
         btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -324,16 +340,23 @@ public class QLDSVJFrame extends javax.swing.JFrame {
 
         jMenu1.setText("File");
 
-        jMenu4.setText("file");
-        jMenu1.add(jMenu4);
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/edu/icon/Disconnect.png"))); // NOI18N
+        jMenuItem2.setText("đăng xuất");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
 
-        jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/edu/icon/Gear.png"))); // NOI18N
-        jMenu5.setText("đăng xuất");
-        jMenu1.add(jMenu5);
-
-        jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/edu/icon/Delete.png"))); // NOI18N
-        jMenu6.setText("exit");
-        jMenu1.add(jMenu6);
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/edu/icon/Delete.png"))); // NOI18N
+        jMenuItem3.setText("exit");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
 
         jMenuBar1.add(jMenu1);
 
@@ -409,6 +432,63 @@ public class QLDSVJFrame extends javax.swing.JFrame {
 mouclick();
     }//GEN-LAST:event_tblQLDSSVMouseClicked
 
+    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
+  
+       grade gr = them();
+        gradeReponstory grReponstory = new gradeReponstory();
+        if (gradeReponstory.addGrade(gr) != null) {
+            JOptionPane.showMessageDialog(this, "thêm thành công");
+        }else{
+            JOptionPane.showMessageDialog(this, "thêm thất bại");
+        }
+        loatdata();
+    }//GEN-LAST:event_btnNewActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+    Integer row = tblQLDSSV.getSelectedRow();
+    if (row == -1){
+        return;
+    }
+        grade gra = them();
+        Integer vitri = vitricansua();
+gra.setId(vitri);
+gradeReponstory grReponstory = new gradeReponstory();
+if(grReponstory.UpdateGrade(gra) != null){
+    JOptionPane.showMessageDialog(this, "sửa thành công");
+  loatdata();
+}else{
+    JOptionPane.showMessageDialog(this, "sửa thất bại");
+}
+
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+     int tron= JOptionPane.showConfirmDialog(this, "bạn có chắc muốn xóa không","nhắc nhở !", JOptionPane.YES_NO_OPTION);
+        if (tron == 0) {
+            grade g = them();
+        gradeReponstory grReponstory = new gradeReponstory();
+        if (grReponstory.DELETEgrade(g)!= null) {
+            JOptionPane.showMessageDialog(this, "xóa thành công");
+        }else{
+            JOptionPane.showMessageDialog(this, "xóa thất bại");
+        }
+        loatdata();
+        }else{
+            return;
+        }
+        
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        new LoginJFrame().setVisible(true);
+        setVisible(false);
+        JOptionPane.showMessageDialog(this, "đăng xuất thành công !");
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+      System.exit(0);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -466,10 +546,9 @@ mouclick();
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -487,7 +566,7 @@ mouclick();
 
     private void loatdata() {
         DefaultTableModel dtm = (DefaultTableModel) this.tblQLDSSV.getModel();
-        dtm.getRowCount();
+        dtm.setRowCount(0);
         List<grade> grade = gradeReponstory.getallGrade();
         for (grade object : grade ) {
             Object[] obj ={
@@ -496,7 +575,8 @@ mouclick();
                 object.getMasv(),
                 object.getTienganh(),
                 object.getTinhoc(),
-                object.getGdtc()
+                object.getGdtc(),
+                object.getDiemtb()
            
             };
             dtm.addRow(obj);
@@ -521,5 +601,23 @@ double diemtb = (ta+tin+gttc)/3;
 double diem = Math.round(diemtb * 10) / 10.0;
 String kq =  String.valueOf(diem);
 lbiDiemTB.setText(kq);
+    }
+    
+    
+    private grade them(){
+        grade g = new grade();
+        
+        g.setMasv(txtMasv.getText().trim());
+        g.setTienganh(txtDiemTA.getText().trim());
+        g.setTinhoc(txtDiemTin.getText().trim());
+        g.setGdtc(txtGDTC.getText().trim());
+     return g;
+    }
+    
+    public Integer vitricansua(){
+        Integer row = tblQLDSSV.getSelectedRow();
+        Integer vt =  (Integer) tblQLDSSV.getValueAt(row, 0);
+
+ return vt;
     }
 }

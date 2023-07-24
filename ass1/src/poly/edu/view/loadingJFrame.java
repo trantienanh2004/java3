@@ -20,11 +20,12 @@ Timer t;
      */
     public loadingJFrame() {
         initComponents();
+        setResizable(false);
         setLocationRelativeTo(null);
-         t = new Timer(1500, new AbstractAction() {
+         t = new Timer(2000, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               pbtiendo.setValue(pbtiendo.getValue()+1 > 100 ? 0 :pbtiendo.getValue() + 8);
+               pbtiendo.setValue(pbtiendo.getValue()+1 > 100 ? 0 :pbtiendo.getValue() + 12);
                 if(pbtiendo.getValue() > 99){
                     t.stop();
             new LoginJFrame().setVisible(true);

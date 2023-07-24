@@ -50,4 +50,16 @@ public class studentsReponstory {
         Integer row = jdbcheper.TruyVancapnhat(spl, sv.getMasv(),sv.getHoten(),sv.getEmail(),sv.getSodt(),sv.getGioitinh(),sv.getDiachi(),sv.getHinh());
         return row;
     }
+     public Integer UPDATEQLSV( students sv){
+        String spl ="update STUDENTS\n" +
+"set MASV = ? , HOTEN = ? , EMAIL = ? ,SODT = ?,GIOITINH = ?, DIACHI =?, HINH =?\n" +
+"WHERE MASV = ?";
+        Integer row = jdbcheper.TruyVancapnhat(spl, sv.getMasv(),sv.getHoten(),sv.getEmail(),sv.getSodt(),sv.getGioitinh(),sv.getDiachi(),sv.getHinh(),sv.getMasv());
+        return row;
+    }
+      public Integer DELETESTUDENTS( students sv){
+      String spl ="EXEC XOA ?";
+        Integer row = jdbcheper.TruyVancapnhat(spl,sv.getMasv());
+      return row;
+    }
 }

@@ -16,6 +16,7 @@ public class grade {
     private String tienganh ;
     private String tinhoc ;
     private String gdtc ;
+    private double diemtb;
 
     public grade() {
     }
@@ -29,10 +30,16 @@ public class grade {
         this.gdtc = gdtc;
     }
 
- 
+    public grade(int id, String HoTen, String masv, String tienganh, String tinhoc, String gdtc, double diemtb) {
+        this.id = id;
+        this.HoTen = HoTen;
+        this.masv = masv;
+        this.tienganh = tienganh;
+        this.tinhoc = tinhoc;
+        this.gdtc = gdtc;
+        this.diemtb = diemtb;
+    }
 
-    
-    
     public int getId() {
         return id;
     }
@@ -41,14 +48,13 @@ public class grade {
         this.id = id;
     }
 
-   public String getHoTen() {
+    public String getHoTen() {
         return HoTen;
     }
 
     public void setHoTen(String HoTen) {
         this.HoTen = HoTen;
     }
-
 
     public String getMasv() {
         return masv;
@@ -82,9 +88,22 @@ public class grade {
         this.gdtc = gdtc;
     }
 
-    public Object getdiemtb() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public double getDiemtb() {
+        return diemtb;
     }
+
+    public void setDiemtb(double diemtb) {
+        this.diemtb = diemtb;
+    }
+   
+
+ 
+
+    
+    
+   
+
+   
 
     
 
