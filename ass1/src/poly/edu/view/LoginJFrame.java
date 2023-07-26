@@ -172,8 +172,8 @@ public class LoginJFrame extends javax.swing.JFrame {
                 } else {
                     new QLSVJFrame().setVisible(true);
                     setVisible(false);
+                   break; 
                 }
-                break;
             }
         }
         if (!check) {

@@ -7,22 +7,15 @@ package poly.edu.service;
 
 import java.util.List;
 import poly.edu.model.students;
+import poly.edu.reponstory.gradeReponstory;
 import poly.edu.reponstory.studentsReponstory;
 
 /**
  *
  * @author HP
  */
-//public class productService {
-//    private final studentsReponstory prodReponstory;
-//
-//    public productService() {
-//        this.prodReponstory = new studentsReponstory();
-//    }
-
-   
+public class studentsService {
     
-//    public List<students> getallproduct(){
-//        return prodReponstory.getallproduct();
-//    }
-//}
+
+   }
+

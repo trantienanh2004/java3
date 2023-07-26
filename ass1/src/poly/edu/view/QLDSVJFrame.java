@@ -433,7 +433,7 @@ mouclick();
     }//GEN-LAST:event_tblQLDSSVMouseClicked
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
-  
+
        grade gr = them();
         gradeReponstory grReponstory = new gradeReponstory();
         if (gradeReponstory.addGrade(gr) != null) {
@@ -606,7 +606,6 @@ lbiDiemTB.setText(kq);
     
     private grade them(){
         grade g = new grade();
-        
         g.setMasv(txtMasv.getText().trim());
         g.setTienganh(txtDiemTA.getText().trim());
         g.setTinhoc(txtDiemTin.getText().trim());

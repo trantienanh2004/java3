@@ -13,14 +13,7 @@ import poly.edu.reponstory.usersReponstory;
  *
  * @author HP
  */
-//public class categoryService {
-//    private final usersReponstory categoryReponstory;
-//
-//    public categoryService() {
-//        this.categoryReponstory = new usersReponstory();
-//    }
-//    
-//    public List<USERS> getallcategory(){
-//        return categoryReponstory.GetAllCategory();
-//    }
-//}
+public class gradeService {
+
+
+}
