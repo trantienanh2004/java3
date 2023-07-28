@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package poly.edu.reponstory;
+package poly.edu.service;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,7 +23,7 @@ import poly.edu.untitity.jdbcheper;
 public class studentsReponstory {
     public  List<students> getallStudents(){
         List<students> dssv = new ArrayList<>();
-        String sql = "SELECT * FROM STUDENTS  ";
+        String sql = "SELECT * FROM STUDENTS ";
         ResultSet rs = jdbcheper.TruyVan(sql);
         try {
             while (rs.next()) {

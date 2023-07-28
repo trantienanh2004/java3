@@ -13,8 +13,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import poly.edu.model.grade;
 import poly.edu.model.students;
-import poly.edu.reponstory.gradeReponstory;
-import poly.edu.reponstory.studentsReponstory;
+import poly.edu.service.gradeReponstory;
+import poly.edu.service.studentsReponstory;
 
 /**
  *
@@ -221,6 +221,11 @@ public class QLSVJFrame extends javax.swing.JFrame {
 
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/edu/icon/Save.png"))); // NOI18N
         btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/edu/icon/Edit.png"))); // NOI18N
         btnUpdate.setText("Update");
@@ -372,38 +377,53 @@ public class QLSVJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_tblQLSVMouseClicked
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
-        students sv = them();
-        studentsReponstory studenReponstory = new studentsReponstory();
-        if (studenReponstory.addQLSV(sv) != null) {
-            JOptionPane.showMessageDialog(this, "thêm thành công");
-        } else {
-            JOptionPane.showMessageDialog(this, "thêm thất bại");
+        int tron = JOptionPane.showConfirmDialog(this, "bạn có chắc muốn làm mới không", "nhắc nhở !", JOptionPane.YES_NO_OPTION);
+        if (tron == 0) {
+            txtDiaChi.setText("");
+            txtEmail.setText("");
+            txtHoTen.setText("");
+            txtMaSV.setText("");
+            txtSoDT.setText("");
+            rdoNam.setSelected(true);
         }
-        dtm();
-
 
     }//GEN-LAST:event_btnNewActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        Integer row = this.tblQLSV.getSelectedRow();
-        if (row == -1) {
-            return;
+
+        int tron = JOptionPane.showConfirmDialog(this, "bạn có chắc muốn update không", "nhắc nhở !", JOptionPane.YES_NO_OPTION);
+        if (tron == 0) {
+            System.out.println("" + txtDiaChi.getText().trim().length() + txtEmail.getText().trim().length() + txtHoTen.getText().trim().length() + txtSoDT.getText().trim().length() + txtMaSV.getText().trim().length());
+            if (txtDiaChi.getText().trim().length() == 0 && txtEmail.getText().trim().length() == 0 && txtHoTen.getText().trim().length() == 0 && txtSoDT.getText().trim().length() == 0 && txtMaSV.getText().trim().length() == 0) {
+                JOptionPane.showMessageDialog(this, "nhập đầy đủ thông tin");
+                return;
+            } else if (txtDiaChi.getText().trim().length() > 0 && txtEmail.getText().trim().length() > 0 && txtHoTen.getText().trim().length() > 0 && txtSoDT.getText().trim().length() > 0 && txtMaSV.getText().trim().length() > 0) {
+                Integer row = this.tblQLSV.getSelectedRow();
+                if (row == -1) {
+                    return;
+                }
+                students sv = them();
+                String vt = vitricansua();
+                sv.setMasv(vt);
+                studentsReponstory stReponstory = new studentsReponstory();
+                if (stReponstory.UPDATEQLSV(sv) != null) {
+                    JOptionPane.showMessageDialog(this, "sửa thành công");
+                } else {
+                    JOptionPane.showMessageDialog(this, "sửa thất bại");
+                }
+                dtm();
+
+            } else {
+                JOptionPane.showMessageDialog(this, "nhập đầy đủ thông tin");
+            }
+
         }
-        students sv = them();
-        String vt = vitricansua();
-        sv.setMasv(vt);
-        studentsReponstory stReponstory = new studentsReponstory();
-        if (stReponstory.UPDATEQLSV(sv) != null) {
-            JOptionPane.showMessageDialog(this, "sửa thành công");
-        } else {
-            JOptionPane.showMessageDialog(this, "sửa thất bại");
-        }
-        dtm();
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         int tron = JOptionPane.showConfirmDialog(this, "bạn có chắc muốn xóa không", "nhắc nhở !", JOptionPane.YES_NO_OPTION);
         if (tron == 0) {
+
             students sv = them();
             studentsReponstory sReponstory = new studentsReponstory();
             if (sReponstory.DELETESTUDENTS(sv) != null) {
@@ -421,14 +441,37 @@ public class QLSVJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-     new LoginJFrame().setVisible(true);
+        new LoginJFrame().setVisible(true);
         setVisible(false);
         JOptionPane.showMessageDialog(this, "đăng xuất thành công !");
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-       System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        int tron = JOptionPane.showConfirmDialog(this, "bạn có chắc muốn thêm không", "nhắc nhở !", JOptionPane.YES_NO_OPTION);
+        if (tron == 0) {
+            System.out.println("" + txtDiaChi.getText().trim().length() + txtEmail.getText().trim().length() + txtHoTen.getText().trim().length() + txtSoDT.getText().trim().length() + txtMaSV.getText().trim().length());
+            if (txtDiaChi.getText().trim().length() == 0 && txtEmail.getText().trim().length() == 0 && txtHoTen.getText().trim().length() == 0 && txtSoDT.getText().trim().length() == 0 && txtMaSV.getText().trim().length() == 0) {
+                JOptionPane.showMessageDialog(this, "nhập đầy đủ thông tin");
+                return;
+            } else if (txtDiaChi.getText().trim().length() > 0 && txtEmail.getText().trim().length() > 0 && txtHoTen.getText().trim().length() > 0 && txtSoDT.getText().trim().length() > 0 && txtMaSV.getText().trim().length() > 0) {
+
+                students sv = them();
+                studentsReponstory studenReponstory = new studentsReponstory();
+                if (studenReponstory.addQLSV(sv) != null) {
+                    JOptionPane.showMessageDialog(this, "thêm thành công");
+                } else {
+                    JOptionPane.showMessageDialog(this, "thêm thất bại");
+                }
+                dtm();
+            } else {
+                JOptionPane.showMessageDialog(this, "nhập đầy đủ thông tin");
+            }
+        }
+    }//GEN-LAST:event_btnSaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -539,18 +582,30 @@ public class QLSVJFrame extends javax.swing.JFrame {
     private students them() {
         students sv = new students();
 
-        sv.setMasv(txtMaSV.getText());
-        sv.setHoten(txtHoTen.getText());
-        sv.setEmail(txtEmail.getText());
+        sv.setMasv(txtMaSV.getText().trim());
+        sv.setHoten(txtHoTen.getText().trim());
+        sv.setEmail(txtEmail.getText().trim());
+        try {
+            String regex = "0-9+";
+            sv.setSodt(Integer.valueOf(txtSoDT.getText().replaceAll(regex, "")));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        sv.setSodt(Integer.valueOf(txtSoDT.getText()));
-        sv.setDiachi(txtDiaChi.getText());
+        sv.setDiachi(txtDiaChi.getText().trim());
+
         if (rdoNam.isSelected() == true) {
             sv.setGioitinh(0);
         } else {
             sv.setGioitinh(1);
         }
-        sv.setHinh(txtHoTen.getText());
+        String link;
+        if (sv.getGioitinh() == 0) {
+            link = "lyLX.jpg";
+        } else {
+            link = "LinhNV.jpg";
+        }
+        sv.setHinh(link);
         return sv;
     }
 

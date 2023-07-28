@@ -9,7 +9,7 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import poly.edu.model.USERS;
-import poly.edu.reponstory.usersReponstory;
+import poly.edu.service.usersReponstory;
 
 /**
  *
@@ -145,31 +145,54 @@ public class LoginJFrame extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         List<USERS> dn = user.GetAllUsers();
-        boolean check = false;
-        for (int i = 0; i < dn.size(); i++) {
-            if (txtUserName.getText().equalsIgnoreCase(dn.get(i).getUsername()) && txtPassword.getText().equalsIgnoreCase(dn.get(i).getPassword())) {
-                check = true;
-                int vt = i;
-                if (dn.get(vt).getRole().equalsIgnoreCase("giang vien")) {
-                    new QLDSVJFrame().setVisible(true);
-                    setVisible(false);
-                    break;
-                } else {
-                    new QLSVJFrame().setVisible(true);
-                    setVisible(false);
-                   break; 
+        if (txtUserName.getText().trim().length() < 0 && txtPassword.getText().trim().length() < 0) {
+            JOptionPane.showMessageDialog(this, "vui lòng nhập đầy đủ thông tin");
+        } else {
+            boolean check = false;
+            for (int i = 0; i < dn.size(); i++) {
+                if (txtUserName.getText().equalsIgnoreCase(dn.get(i).getUsername()) && txtPassword.getText().equalsIgnoreCase(dn.get(i).getPassword())) {
+                    check = true;
+                    int vt = i;
+                    if (dn.get(vt).getRole().equalsIgnoreCase("giang vien")) {
+                        new QLDSVJFrame().setVisible(true);
+                        setVisible(false);
+                        break;
+                    }
+                    if (dn.get(vt).getRole().equalsIgnoreCase("phong ban")) {
+                        new QLSVJFrame().setVisible(true);
+                        setVisible(false);
+                        break;
+                    }
+                    if (dn.get(vt).getRole().equalsIgnoreCase("admin")) {
+                        String x = JOptionPane.showInputDialog(this, "bạn muốn vào đâu ? (chỉnh điểm:1,thêm sv:2)");
+                        if (x.equals("1")) {
+                            new QLDSVJFrame().setVisible(true);
+                            setVisible(false);
+                            break;
+                        } else if (x.equals("2")) {
+                            new QLSVJFrame().setVisible(true);
+                            setVisible(false);
+                            break;
+                        } else {
+                            JOptionPane.showMessageDialog(this, "lựa chọn của bạn không tồn tại");
+                        }
+                    }
                 }
             }
+            if (!check) {
+                JOptionPane.showMessageDialog(this, "tài khoản hoặc mật khẩu sai vui lòng nhập lại");
+
+            }
+
         }
-        if (!check) {
-            JOptionPane.showMessageDialog(this, "tài khoản hoặc mật khẩu sai vui lòng nhập lại");
-        }
+
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnCannelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCannelActionPerformed
         int tron = JOptionPane.showConfirmDialog(this, "thoát", "bạn có muốn thoát hay không ?", JOptionPane.YES_NO_OPTION);
         if (tron == 0) {
             System.exit(0);
+            
         }
     }//GEN-LAST:event_btnCannelActionPerformed
 

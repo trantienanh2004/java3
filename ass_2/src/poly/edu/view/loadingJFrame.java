@@ -25,7 +25,7 @@ Timer t;
          t = new Timer(2000, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               pbtiendo.setValue(pbtiendo.getValue()+1 > 100 ? 0 :pbtiendo.getValue() + 12);
+               pbtiendo.setValue(pbtiendo.getValue()+1 > 100 ? 0 :pbtiendo.getValue() + 40);
                 if(pbtiendo.getValue() > 99){
                     t.stop();
             new LoginJFrame().setVisible(true);

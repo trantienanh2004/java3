@@ -7,12 +7,14 @@ package poly.edu.view;
 
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import poly.edu.model.grade;
 import poly.edu.model.students;
-import poly.edu.reponstory.gradeReponstory;
-import poly.edu.reponstory.studentsReponstory;
+import poly.edu.service.gradeReponstory;
+import poly.edu.service.studentsReponstory;
+import poly.edu.untitity.jdbcheper;
 
 /**
  *
@@ -20,21 +22,24 @@ import poly.edu.reponstory.studentsReponstory;
  */
 public class QLDSVJFrame extends javax.swing.JFrame {
 
+    int vitri = 0;
     /**
      * Creates new form QLDSVJFrame
      */
-     gradeReponstory gradeReponstory = new gradeReponstory();
+    gradeReponstory gradeReponstory = new gradeReponstory();
     DefaultComboBoxModel<grade> modelCombo;
+
     public QLDSVJFrame() {
         initComponents();
         setResizable(false);
         setLocationRelativeTo(null);
         List<grade> grade = gradeReponstory.getallGrade();
-        modelCombo =(DefaultComboBoxModel) new DefaultComboBoxModel<>(grade.toArray());
+        modelCombo = (DefaultComboBoxModel) new DefaultComboBoxModel<>(grade.toArray());
         loatdata();
-         if(tblQLDSSV.getRowCount() > 0){
+        if (tblQLDSSV.getRowCount() > 0) {
             tblQLDSSV.setRowSelectionInterval(0, 0);
-           mouclick();
+            mouclick();
+
         }
     }
 
@@ -71,10 +76,10 @@ public class QLDSVJFrame extends javax.swing.JFrame {
         btnSave = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        btngiam = new javax.swing.JButton();
+        btntang = new javax.swing.JButton();
+        btndau = new javax.swing.JButton();
+        btncuoi = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblQLDSSV = new javax.swing.JTable();
@@ -129,7 +134,7 @@ public class QLDSVJFrame extends javax.swing.JFrame {
                 .addContainerGap(41, Short.MAX_VALUE))
         );
 
-        jLabel2.setText("Tìm kiếm");
+        jLabel2.setText("Tìm kiếm:");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -159,27 +164,25 @@ public class QLDSVJFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel8))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addComponent(jLabel6)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(61, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(31, 31, 31))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel6)
+                                    .addGap(43, 43, 43))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4)
-                        .addGap(41, 41, 41)))
+                        .addGap(42, 42, 42)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -230,8 +233,8 @@ public class QLDSVJFrame extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtDiemTin, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel7)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtGDTC, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addContainerGap(25, Short.MAX_VALUE))
@@ -247,6 +250,11 @@ public class QLDSVJFrame extends javax.swing.JFrame {
 
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/edu/icon/Save.png"))); // NOI18N
         btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/edu/icon/Delete.png"))); // NOI18N
         btnDelete.setText("Delete");
@@ -291,13 +299,33 @@ public class QLDSVJFrame extends javax.swing.JFrame {
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/edu/icon/Left.png"))); // NOI18N
+        btngiam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/edu/icon/Left.png"))); // NOI18N
+        btngiam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btngiamActionPerformed(evt);
+            }
+        });
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/edu/icon/Right.png"))); // NOI18N
+        btntang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/edu/icon/Right.png"))); // NOI18N
+        btntang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btntangActionPerformed(evt);
+            }
+        });
 
-        jButton7.setText(">>");
+        btndau.setText("<<");
+        btndau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btndauActionPerformed(evt);
+            }
+        });
 
-        jButton8.setText("<<");
+        btncuoi.setText(">>");
+        btncuoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncuoiActionPerformed(evt);
+            }
+        });
 
         tblQLDSSV.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -340,7 +368,7 @@ public class QLDSVJFrame extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
         );
 
         jMenu1.setText("File");
@@ -388,13 +416,13 @@ public class QLDSVJFrame extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton5)
+                                        .addComponent(btngiam)
                                         .addGap(76, 76, 76)
-                                        .addComponent(jButton7)
+                                        .addComponent(btndau)
                                         .addGap(90, 90, 90)
-                                        .addComponent(jButton8)
+                                        .addComponent(btncuoi)
                                         .addGap(89, 89, 89)
-                                        .addComponent(jButton6))
+                                        .addComponent(btntang))
                                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -404,7 +432,7 @@ public class QLDSVJFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton5, jButton6, jButton7, jButton8});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btncuoi, btndau, btngiam, btntang});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -420,68 +448,80 @@ public class QLDSVJFrame extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btngiam, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                    .addComponent(btndau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btncuoi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btntang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton5, jButton6, jButton7, jButton8});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btncuoi, btndau, btngiam, btntang});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblQLDSSVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblQLDSSVMouseClicked
-mouclick();
+        mouclick();
     }//GEN-LAST:event_tblQLDSSVMouseClicked
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
+        txtMasv.setText("");
+        txtDiemTA.setText("");
+        txtDiemTin.setText("");
+        txtGDTC.setText("");
+        lbiHoTen.setText("");
+        lbiDiemTB.setText("0,0");
 
-       grade gr = them();
-        gradeReponstory grReponstory = new gradeReponstory();
-        if (gradeReponstory.addGrade(gr) != null) {
-            JOptionPane.showMessageDialog(this, "thêm thành công");
-        }else{
-            JOptionPane.showMessageDialog(this, "thêm thất bại");
-        }
-        loatdata();
     }//GEN-LAST:event_btnNewActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-    Integer row = tblQLDSSV.getSelectedRow();
-    if (row == -1){
-        return;
-    }
+int tron = JOptionPane.showConfirmDialog(this,"bạn có chắc chắn muốn sửa không ?" ,"thông báo!",JOptionPane.YES_NO_OPTION);
+        if(tron == 0){
+        if(txtMasv.getText().trim().length() > 0&&txtDiemTA.getText().trim().length() > 0&&txtDiemTin.getText().trim().length() > 0&txtGDTC.getText().trim().length() > 0){
+
+        Integer row = tblQLDSSV.getSelectedRow();
+        if (row == -1) {
+            return;
+        }
         grade gra = them();
         Integer vitri = vitricansua();
-gra.setId(vitri);
-gradeReponstory grReponstory = new gradeReponstory();
-if(grReponstory.UpdateGrade(gra) != null){
-    JOptionPane.showMessageDialog(this, "sửa thành công");
-  loatdata();
+        gra.setId(vitri);
+        gradeReponstory grReponstory = new gradeReponstory();
+        if (grReponstory.UpdateGrade(gra) != null) {
+            if(txtDiemTA.getText().matches("0-9+")&&txtDiemTin.getText().matches("0-9+")&&txtGDTC.getText().matches("0-9+")){
+                  JOptionPane.showMessageDialog(this, "sửa thành công");
+            loatdata();
+                
+            }else{
+                return;
+            }
+            JOptionPane.showMessageDialog(this, "sửa thành công");
+            loatdata();
+        } else {
+            JOptionPane.showMessageDialog(this, "sửa thất bại");
+        }
 }else{
-    JOptionPane.showMessageDialog(this, "sửa thất bại");
+    JOptionPane.showMessageDialog(this, "làm ơn đừng để trống mà, làm ơn đó :((");
 }
-
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-     int tron= JOptionPane.showConfirmDialog(this, "bạn có chắc muốn xóa không","nhắc nhở !", JOptionPane.YES_NO_OPTION);
+        int tron = JOptionPane.showConfirmDialog(this, "bạn có chắc muốn xóa không", "nhắc nhở !", JOptionPane.YES_NO_OPTION);
         if (tron == 0) {
             grade g = them();
-        gradeReponstory grReponstory = new gradeReponstory();
-        if (grReponstory.DELETEgrade(g)!= null) {
-            JOptionPane.showMessageDialog(this, "xóa thành công");
-        }else{
-            JOptionPane.showMessageDialog(this, "xóa thất bại");
-        }
-        loatdata();
-        }else{
+            gradeReponstory grReponstory = new gradeReponstory();
+            if (grReponstory.DELETEgrade(g) != null) {
+                JOptionPane.showMessageDialog(this, "xóa thành công");
+            } else {
+                JOptionPane.showMessageDialog(this, "xóa thất bại");
+            }
+            loatdata();
+        } else {
             return;
         }
-        
+
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -491,30 +531,96 @@ if(grReponstory.UpdateGrade(gra) != null){
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-      System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void btnMaSvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMaSvActionPerformed
-      List<grade> g = gradeReponstory.getallGrade();
-      int i ;
-      boolean check = true;
-        for (i = 0; i < g.size() - 1; i++) {
-//      if(txtTimMaSv.getText().equalsIgnoreCase(g.get(i).getMasv())){
-//          JOptionPane.showMessageDialog(this, ""+g.get(i).getMasv()+" "+g.get(i).getHoTen()+" "+g.get(i).getTienganh()+" "+g.get(i).getTinhoc()+" "+g.get(i).getGdtc()+" "+g.get(i).getDiemtb());
-//      }else{
-//          check = false;
-//      }
-//      } 
-//        while (check !=false) {            
-//            JOptionPane.showMessageDialog(this, "không tìm thấy mã ");
+        List<grade> g = gradeReponstory.getallGrade();
+if(txtTimMaSv.getText().trim().length() > 0){
+    
+
+        boolean check = false;
+        for (int i = 0; i < g.size(); i++) {
+            if (txtTimMaSv.getText().equalsIgnoreCase(g.get(i).getMasv())) {
+                check = true;
+                JOptionPane.showMessageDialog(this, "mã sv: " + g.get(i).getMasv() + "\nHọ Tên: " + g.get(i).getHoTen() + "\nđiểm t.anh: " + g.get(i).getTienganh() + ",điểm tin học: " + g.get(i).getTinhoc() + "\nđiểm GDTC:  " + g.get(i).getGdtc() + "\nđiểm TB: " + g.get(i).getDiemtb());
+            }
         }
-        int vt = i;
-        if(txtTimMaSv.getText().equalsIgnoreCase(g.get(vt).getMasv())){
-            System.out.println("đúng");
-        }else{
-            System.out.println("sai");
+        if (check == false) {
+            JOptionPane.showMessageDialog(this, "không tìm thấy");
         }
+}else{
+    JOptionPane.showMessageDialog(this, "nhập vào đi cô ơiiii");
+}
+//        if(txtTimMaSv.getText().equalsIgnoreCase(g.get(i).getMasv())){
+//         System.out.println("đúng"+g.get(i).getHoTen());
+//       }else{
+//        System.out.println("sai"+g.get(i).getHoTen());
+//       }
+        
+
     }//GEN-LAST:event_btnMaSvActionPerformed
+
+    private void btngiamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btngiamActionPerformed
+
+        vitri -= vitri;
+        System.out.println("" + vitri);
+
+        List<grade> g = gradeReponstory.getallGrade();
+        if (vitri < 0) {
+            JOptionPane.showMessageDialog(this, "bạn đang ở đầu");
+            return;
+        }
+        display(vitri);
+    }//GEN-LAST:event_btngiamActionPerformed
+
+    private void btndauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndauActionPerformed
+        display(0);
+    }//GEN-LAST:event_btndauActionPerformed
+
+    private void btncuoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncuoiActionPerformed
+        List<grade> g = gradeReponstory.getallGrade();
+        display(g.size() - 1);
+    }//GEN-LAST:event_btncuoiActionPerformed
+
+    private void btntangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntangActionPerformed
+
+        vitri += vitri;
+        System.out.println("" + vitri);
+
+        List<grade> g = gradeReponstory.getallGrade();
+        if (vitri >= g.size() - 1) {
+            JOptionPane.showMessageDialog(this, "bạn đang ở cuối");
+            return;
+        }
+        display(vitri);
+    }//GEN-LAST:event_btntangActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+
+        int tron = JOptionPane.showConfirmDialog(this,"bạn có chắc chắn muốn thêm không ?" ,"thông báo!",JOptionPane.YES_NO_OPTION);
+        if(tron == 0){
+        if(txtMasv.getText().trim().length() > 0&&txtDiemTA.getText().trim().length() > 0&&txtDiemTin.getText().trim().length() > 0&txtGDTC.getText().trim().length() > 0){
+    grade gr = them();
+        gradeReponstory grReponstory = new gradeReponstory();
+        if (gradeReponstory.addGrade(gr) != null) {
+            if(txtDiemTA.getText().matches("0-9+")&&txtDiemTin.getText().matches("0-9+")&&txtGDTC.getText().matches("0-9+")){
+                JOptionPane.showMessageDialog(this, "thêm thành công");
+            }else{
+                return;
+            }
+            
+        } else {
+            JOptionPane.showMessageDialog(this, "thêm thất bại");
+        }
+        loatdata();
+}else{
+    JOptionPane.showMessageDialog(this, "làm ơn đừng để trống mà :((");
+}
+        }
+
+        
+    }//GEN-LAST:event_btnSaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -557,10 +663,10 @@ if(grReponstory.UpdateGrade(gra) != null){
     private javax.swing.JButton btnNew;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnUpdate;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
+    private javax.swing.JButton btncuoi;
+    private javax.swing.JButton btndau;
+    private javax.swing.JButton btngiam;
+    private javax.swing.JButton btntang;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
@@ -595,8 +701,8 @@ if(grReponstory.UpdateGrade(gra) != null){
         DefaultTableModel dtm = (DefaultTableModel) this.tblQLDSSV.getModel();
         dtm.setRowCount(0);
         List<grade> grade = gradeReponstory.getallGrade();
-        for (grade object : grade ) {
-            Object[] obj ={
+        for (grade object : grade) {
+            Object[] obj = {
                 object.getId(),
                 object.getHoTen(),
                 object.getMasv(),
@@ -604,7 +710,7 @@ if(grReponstory.UpdateGrade(gra) != null){
                 object.getTinhoc(),
                 object.getGdtc(),
                 object.getDiemtb()
-           
+
             };
             dtm.addRow(obj);
         }
@@ -613,36 +719,52 @@ if(grReponstory.UpdateGrade(gra) != null){
     private void mouclick() {
         List<grade> ds = gradeReponstory.getallGrade();
         int row = this.tblQLDSSV.getSelectedRow();
-        if(row == -1){
+        if (row == -1) {
             return;
         }
-        txtMasv.setText(tblQLDSSV.getValueAt(row, 1).toString());
-        lbiHoTen.setText(tblQLDSSV.getValueAt(row, 2).toString());
+        txtMasv.setText(tblQLDSSV.getValueAt(row, 2).toString());
+        lbiHoTen.setText(tblQLDSSV.getValueAt(row, 1).toString());
         txtDiemTA.setText(tblQLDSSV.getValueAt(row, 3).toString());
-       txtDiemTin.setText(tblQLDSSV.getValueAt(row, 4).toString());
-      txtGDTC.setText(tblQLDSSV.getValueAt(row, 5).toString());
-       double ta =  Double.valueOf(tblQLDSSV.getValueAt(row, 3).toString());
-      double tin =  Double.valueOf(tblQLDSSV.getValueAt(row, 4).toString());
-      double gttc =  Double.valueOf(tblQLDSSV.getValueAt(row, 5).toString());
-double diemtb = (ta+tin+gttc)/3;
-double diem = Math.round(diemtb * 10) / 10.0;
-String kq =  String.valueOf(diem);
-lbiDiemTB.setText(kq);
+        txtDiemTin.setText(tblQLDSSV.getValueAt(row, 4).toString());
+        txtGDTC.setText(tblQLDSSV.getValueAt(row, 5).toString());
+        double ta = Double.valueOf(tblQLDSSV.getValueAt(row, 3).toString());
+        double tin = Double.valueOf(tblQLDSSV.getValueAt(row, 4).toString());
+        double gttc = Double.valueOf(tblQLDSSV.getValueAt(row, 5).toString());
+        double diemtb = Double.valueOf(tblQLDSSV.getValueAt(row, 6).toString());
+        double diem = Math.round(diemtb * 10) / 10.0;
+        String kq = String.valueOf(diem);
+        lbiDiemTB.setText(kq);
     }
-    
-    
-    private grade them(){
+
+    private grade them() {
         grade g = new grade();
         g.setMasv(txtMasv.getText().trim());
-        g.setTienganh(Double.parseDouble(txtDiemTA.getText().trim()));
-        g.setTinhoc(Double.parseDouble(txtDiemTin.getText().trim()));
-        g.setGdtc(Double.parseDouble(txtGDTC.getText().trim()));
-     return g;
+        try {
+            g.setTienganh(Double.parseDouble(txtDiemTA.getText().trim()));
+            g.setTinhoc(Double.parseDouble(txtDiemTin.getText().trim()));
+            g.setGdtc(Double.parseDouble(txtGDTC.getText().trim()));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "nhập số đi đừng nhập linh tinh mà :<");
+            e.printStackTrace();
+            
+        }
+
+        return g;
     }
-    
-    public Integer vitricansua(){
+
+    public Integer vitricansua() {
         Integer row = tblQLDSSV.getSelectedRow();
-        Integer vt =  (Integer) tblQLDSSV.getValueAt(row, 0);
- return vt;
+        Integer vt = (Integer) tblQLDSSV.getValueAt(row, 0);
+        return vt;
+    }
+
+    public void display(int vt) {
+        List<grade> grade = gradeReponstory.getallGrade();
+        txtMasv.setText(grade.get(vitri).getMasv());
+        lbiHoTen.setText(grade.get(vitri).getHoTen());
+        txtDiemTin.setText(String.valueOf(grade.get(vitri).getTinhoc()));
+        txtDiemTA.setText(String.valueOf(grade.get(vitri).getTienganh()));
+        txtGDTC.setText(String.valueOf(grade.get(vitri).getGdtc()));
+        lbiDiemTB.setText(String.valueOf(grade.get(vitri).getDiemtb()));
     }
 }
