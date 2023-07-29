@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.shape.SVGPath;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import poly.edu.model.grade;
@@ -184,23 +185,23 @@ public class QLSVJFrame extends javax.swing.JFrame {
 
         jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        lbiAnh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/edu/2.Images (1)/images/LyLX.jpg"))); // NOI18N
+        lbiAnh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/edu/Images/images/LyLX.jpg"))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(40, Short.MAX_VALUE)
+                .addContainerGap(57, Short.MAX_VALUE)
                 .addComponent(lbiAnh)
-                .addGap(35, 35, 35))
+                .addGap(47, 47, 47))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(lbiAnh)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(lbiAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         btnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/edu/icon/Add.png"))); // NOI18N
@@ -335,22 +336,23 @@ public class QLSVJFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(321, 321, 321)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(58, 58, 58)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(41, 41, 41)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(257, Short.MAX_VALUE))
-            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(320, 320, 320)
+                        .addComponent(jLabel1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -397,22 +399,32 @@ public class QLSVJFrame extends javax.swing.JFrame {
             if (txtDiaChi.getText().trim().length() == 0 && txtEmail.getText().trim().length() == 0 && txtHoTen.getText().trim().length() == 0 && txtSoDT.getText().trim().length() == 0 && txtMaSV.getText().trim().length() == 0) {
                 JOptionPane.showMessageDialog(this, "nhập đầy đủ thông tin");
                 return;
-            } else if (txtDiaChi.getText().trim().length() > 0 && txtEmail.getText().trim().length() > 0 && txtHoTen.getText().trim().length() > 0 && txtSoDT.getText().trim().length() > 0 && txtMaSV.getText().trim().length() > 0) {
+            }
+            if (txtDiaChi.getText().trim().length() > 0 && txtEmail.getText().trim().length() > 0 && txtHoTen.getText().trim().length() > 0 && txtSoDT.getText().trim().length() > 0 && txtMaSV.getText().trim().length() > 0) {
+
                 Integer row = this.tblQLSV.getSelectedRow();
                 if (row == -1) {
                     return;
                 }
+
                 students sv = them();
                 String vt = vitricansua();
                 sv.setMasv(vt);
-                studentsReponstory stReponstory = new studentsReponstory();
-                if (stReponstory.UPDATEQLSV(sv) != null) {
-                    JOptionPane.showMessageDialog(this, "sửa thành công");
-                } else {
-                    JOptionPane.showMessageDialog(this, "sửa thất bại");
-                }
-                dtm();
+                studentsReponstory studenReponstory = new studentsReponstory();
 
+                if (checksodt == false) {
+                    if (studenReponstory.UPDATEQLSV(sv) != null) {
+                        JOptionPane.showMessageDialog(this, "sửa thành công");
+                        dtm();
+
+                    } else {
+                        JOptionPane.showMessageDialog(this, "sửa thất bại");
+                        return;
+                    }
+                } else {
+
+                    return;
+                }
             } else {
                 JOptionPane.showMessageDialog(this, "nhập đầy đủ thông tin");
             }
@@ -429,6 +441,10 @@ public class QLSVJFrame extends javax.swing.JFrame {
             if (sReponstory.DELETESTUDENTS(sv) != null) {
                 JOptionPane.showMessageDialog(this, "xóa thành công");
                 dtm();
+                if (tblQLSV.getRowCount() > 0) {
+                    tblQLSV.setRowSelectionInterval(0, 0);
+                    mouclick();
+                }
             } else {
                 JOptionPane.showMessageDialog(this, "xóa thất bại");
             }
@@ -457,18 +473,44 @@ public class QLSVJFrame extends javax.swing.JFrame {
             if (txtDiaChi.getText().trim().length() == 0 && txtEmail.getText().trim().length() == 0 && txtHoTen.getText().trim().length() == 0 && txtSoDT.getText().trim().length() == 0 && txtMaSV.getText().trim().length() == 0) {
                 JOptionPane.showMessageDialog(this, "nhập đầy đủ thông tin");
                 return;
-            } else if (txtDiaChi.getText().trim().length() > 0 && txtEmail.getText().trim().length() > 0 && txtHoTen.getText().trim().length() > 0 && txtSoDT.getText().trim().length() > 0 && txtMaSV.getText().trim().length() > 0) {
-
+            }
+            if (txtDiaChi.getText().trim().length() > 0 && txtEmail.getText().trim().length() > 0 && txtHoTen.getText().trim().length() > 0 && txtSoDT.getText().trim().length() > 0 && txtMaSV.getText().trim().length() > 0) {
+                boolean check = false;
                 students sv = them();
                 studentsReponstory studenReponstory = new studentsReponstory();
-                if (studenReponstory.addQLSV(sv) != null) {
-                    JOptionPane.showMessageDialog(this, "thêm thành công");
-                } else {
-                    JOptionPane.showMessageDialog(this, "thêm thất bại");
+                int i;
+                for (i = 0; i < studenReponstory.getallStudents().size(); i++) {
+
+                    if (studenReponstory.getallStudents().get(i).getMasv().equalsIgnoreCase(txtMaSV.getText())) {
+
+                        JOptionPane.showMessageDialog(this, "mã đã tồn tại ");
+                        check = true;
+                        return;
+                    }
+
                 }
-                dtm();
+                if (check == false) {
+                    if (checksodt == false) {
+                        if (studenReponstory.addQLSV(sv) != null) {
+                            JOptionPane.showMessageDialog(this, "thêm thành công");
+                            dtm();
+                            if (tblQLSV.getRowCount() > 0) {
+                                tblQLSV.setRowSelectionInterval(0, 0);
+                                mouclick();
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(this, "thêm thất bại");
+                            return;
+                        }
+
+                    } else {
+                        JOptionPane.showMessageDialog(this, "số điện thoại phải nhập số");
+                        return;
+                    }
+                }
             } else {
                 JOptionPane.showMessageDialog(this, "nhập đầy đủ thông tin");
+
             }
         }
     }//GEN-LAST:event_btnSaveActionPerformed
@@ -576,8 +618,10 @@ public class QLSVJFrame extends javax.swing.JFrame {
         }
         txtSoDT.setText(tblQLSV.getValueAt(row, 3).toString());
         txtDiaChi.setText(tblQLSV.getValueAt(row, 5).toString());
-
+        ImageIcon icon = new ImageIcon("src/poly/edu/Images/images/" + tblQLSV.getValueAt(row, 6));
+        lbiAnh.setIcon(icon);
     }
+    boolean checksodt = false;
 
     private students them() {
         students sv = new students();
@@ -586,10 +630,12 @@ public class QLSVJFrame extends javax.swing.JFrame {
         sv.setHoten(txtHoTen.getText().trim());
         sv.setEmail(txtEmail.getText().trim());
         try {
-            String regex = "0-9+";
-            sv.setSodt(Integer.valueOf(txtSoDT.getText().replaceAll(regex, "")));
+
+            sv.setSodt(Integer.valueOf(txtSoDT.getText()));
         } catch (Exception e) {
             e.printStackTrace();
+
+            checksodt = true;
         }
 
         sv.setDiachi(txtDiaChi.getText().trim());

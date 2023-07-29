@@ -36,6 +36,7 @@ public class QLDSVJFrame extends javax.swing.JFrame {
         List<grade> grade = gradeReponstory.getallGrade();
         modelCombo = (DefaultComboBoxModel) new DefaultComboBoxModel<>(grade.toArray());
         loatdata();
+        display(vitri);
         if (tblQLDSSV.getRowCount() > 0) {
             tblQLDSSV.setRowSelectionInterval(0, 0);
             mouclick();
@@ -169,13 +170,12 @@ public class QLDSVJFrame extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(31, 31, 31))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addGap(43, 43, 43))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(43, 43, 43))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE))))
@@ -357,11 +357,8 @@ public class QLDSVJFrame extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 872, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jLabel11)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 897, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -414,16 +411,16 @@ public class QLDSVJFrame extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(btngiam)
-                                        .addGap(76, 76, 76)
+                                        .addGap(93, 93, 93)
                                         .addComponent(btndau)
-                                        .addGap(90, 90, 90)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(btncuoi)
-                                        .addGap(89, 89, 89)
+                                        .addGap(71, 71, 71)
                                         .addComponent(btntang))
-                                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
@@ -472,52 +469,77 @@ public class QLDSVJFrame extends javax.swing.JFrame {
         txtGDTC.setText("");
         lbiHoTen.setText("");
         lbiDiemTB.setText("0,0");
-
+   List<students> stuReponstory = new studentsReponstory().getallStudents();
+        System.out.println(""+stuReponstory.size());
     }//GEN-LAST:event_btnNewActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-int tron = JOptionPane.showConfirmDialog(this,"bạn có chắc chắn muốn sửa không ?" ,"thông báo!",JOptionPane.YES_NO_OPTION);
-        if(tron == 0){
-        if(txtMasv.getText().trim().length() > 0&&txtDiemTA.getText().trim().length() > 0&&txtDiemTin.getText().trim().length() > 0&txtGDTC.getText().trim().length() > 0){
+        int tron = JOptionPane.showConfirmDialog(this, "bạn có chắc chắn muốn sửa không ?", "thông báo!", JOptionPane.YES_NO_OPTION);
+        if (tron == 0) {
+            if (txtMasv.getText().trim().length() > 0 && txtDiemTA.getText().trim().length() > 0 && txtDiemTin.getText().trim().length() > 0 & txtGDTC.getText().trim().length() > 0) {
 
-        Integer row = tblQLDSSV.getSelectedRow();
-        if (row == -1) {
-            return;
-        }
-        grade gra = them();
-        Integer vitri = vitricansua();
-        gra.setId(vitri);
-        gradeReponstory grReponstory = new gradeReponstory();
-        if (grReponstory.UpdateGrade(gra) != null) {
-            if(txtDiemTA.getText().matches("0-9+")&&txtDiemTin.getText().matches("0-9+")&&txtGDTC.getText().matches("0-9+")){
-                  JOptionPane.showMessageDialog(this, "sửa thành công");
-            loatdata();
+                Integer row = tblQLDSSV.getSelectedRow();
+                if (row == -1) {
+                    return;
+                }
+                List<students> stuReponstory = new studentsReponstory().getallStudents();
+                boolean check = false;
+                int i;
+         for ( i= 0; i <stuReponstory.size() ; i++) {  
+        if (stuReponstory.get(i).getMasv().equalsIgnoreCase(txtMasv.getText())) {
+             check = true;
+                grade gra = them();
+                Integer vitri = vitricansua();
+                gra.setId(vitri);
+   double diemta = Double.parseDouble(txtDiemTA.getText());
+   double diemtin = Double.parseDouble(txtDiemTin.getText());
+   double diemgdtc = Double.parseDouble(txtGDTC.getText());
+                gradeReponstory grReponstory = new gradeReponstory();
                 
-            }else{
-                return;
+                    if (diemta <= 10 && diemtin<= 10 &&  diemgdtc<= 10) {
+                     if (grReponstory.UpdateGrade(gra) != null) {   
+                        JOptionPane.showMessageDialog(this, "sửa thành công");
+                        loatdata();
+                       
+                    } else {
+                      JOptionPane.showMessageDialog(this, "sửa thất bại");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "sửa thất bại điểm không được vượt quá 10");
+                }
+                
+         } }if(check == false){
+                JOptionPane.showMessageDialog(this, "chưa tồn tại mã sinh viên này");
+                 }
+ 
+            } else {
+                JOptionPane.showMessageDialog(this, "làm ơn đừng để trống mà, làm ơn đó :((");
             }
-            JOptionPane.showMessageDialog(this, "sửa thành công");
-            loatdata();
-        } else {
-            JOptionPane.showMessageDialog(this, "sửa thất bại");
+            
+            
         }
-}else{
-    JOptionPane.showMessageDialog(this, "làm ơn đừng để trống mà, làm ơn đó :((");
-}
-        }
+            
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        int tron = JOptionPane.showConfirmDialog(this, "bạn có chắc muốn xóa không", "nhắc nhở !", JOptionPane.YES_NO_OPTION);
+        int row = tblQLDSSV.getSelectedRow();
+        if (row == -1) {
+
+            return;
+        }
+        int vtluatron = row + 1;
+        int tron = JOptionPane.showConfirmDialog(this, "bạn có chắc muốn xóa không" + "(vị trí : " + vtluatron + ")", "nhắc nhở !", JOptionPane.YES_NO_OPTION);
         if (tron == 0) {
             grade g = them();
+            
             gradeReponstory grReponstory = new gradeReponstory();
             if (grReponstory.DELETEgrade(g) != null) {
                 JOptionPane.showMessageDialog(this, "xóa thành công");
+                  loatdata();
             } else {
                 JOptionPane.showMessageDialog(this, "xóa thất bại");
             }
-            loatdata();
+          
         } else {
             return;
         }
@@ -536,34 +558,33 @@ int tron = JOptionPane.showConfirmDialog(this,"bạn có chắc chắn muốn s�
 
     private void btnMaSvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMaSvActionPerformed
         List<grade> g = gradeReponstory.getallGrade();
-if(txtTimMaSv.getText().trim().length() > 0){
-    
+        if (txtTimMaSv.getText().trim().length() > 0) {
 
-        boolean check = false;
-        for (int i = 0; i < g.size(); i++) {
-            if (txtTimMaSv.getText().equalsIgnoreCase(g.get(i).getMasv())) {
-                check = true;
-                JOptionPane.showMessageDialog(this, "mã sv: " + g.get(i).getMasv() + "\nHọ Tên: " + g.get(i).getHoTen() + "\nđiểm t.anh: " + g.get(i).getTienganh() + ",điểm tin học: " + g.get(i).getTinhoc() + "\nđiểm GDTC:  " + g.get(i).getGdtc() + "\nđiểm TB: " + g.get(i).getDiemtb());
+            boolean check = false;
+            for (int i = 0; i < g.size(); i++) {
+                if (txtTimMaSv.getText().equalsIgnoreCase(g.get(i).getMasv())) {
+                    check = true;
+                    JOptionPane.showMessageDialog(this, "mã sv: " + g.get(i).getMasv() + "\nHọ Tên: " + g.get(i).getHoTen() + "\nđiểm t.anh: " + g.get(i).getTienganh() + ",điểm tin học: " + g.get(i).getTinhoc() + "\nđiểm GDTC:  " + g.get(i).getGdtc() + "\nđiểm TB: " + g.get(i).getDiemtb());
+                }
             }
+            if (check == false) {
+                JOptionPane.showMessageDialog(this, "không tìm thấy");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "nhập vào đi cô ơiiii");
         }
-        if (check == false) {
-            JOptionPane.showMessageDialog(this, "không tìm thấy");
-        }
-}else{
-    JOptionPane.showMessageDialog(this, "nhập vào đi cô ơiiii");
-}
 //        if(txtTimMaSv.getText().equalsIgnoreCase(g.get(i).getMasv())){
 //         System.out.println("đúng"+g.get(i).getHoTen());
 //       }else{
 //        System.out.println("sai"+g.get(i).getHoTen());
 //       }
-        
+
 
     }//GEN-LAST:event_btnMaSvActionPerformed
 
     private void btngiamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btngiamActionPerformed
 
-        vitri -= vitri;
+        vitri --;
         System.out.println("" + vitri);
 
         List<grade> g = gradeReponstory.getallGrade();
@@ -572,54 +593,90 @@ if(txtTimMaSv.getText().trim().length() > 0){
             return;
         }
         display(vitri);
+         if (tblQLDSSV.getRowCount() > 0) {
+            tblQLDSSV.setRowSelectionInterval(vitri, vitri);
+            mouclick();
+
+        }
     }//GEN-LAST:event_btngiamActionPerformed
 
     private void btndauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndauActionPerformed
-        display(0);
+      vitri = 0;
+        display(vitri);
+          if (tblQLDSSV.getRowCount() > 0) {
+            tblQLDSSV.setRowSelectionInterval(vitri, vitri);
+            mouclick();
+
+        }
     }//GEN-LAST:event_btndauActionPerformed
 
     private void btncuoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncuoiActionPerformed
         List<grade> g = gradeReponstory.getallGrade();
-        display(g.size() - 1);
+        vitri = 2;
+        display(vitri);
+        if (tblQLDSSV.getRowCount() > 0) {
+            tblQLDSSV.setRowSelectionInterval(vitri, vitri);
+            mouclick();
+
+        }
     }//GEN-LAST:event_btncuoiActionPerformed
 
     private void btntangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntangActionPerformed
 
-        vitri += vitri;
+        vitri ++;
         System.out.println("" + vitri);
 
         List<grade> g = gradeReponstory.getallGrade();
-        if (vitri >= g.size() - 1) {
+        if (vitri > g.size()-1 ) {
             JOptionPane.showMessageDialog(this, "bạn đang ở cuối");
             return;
         }
         display(vitri);
+          if (tblQLDSSV.getRowCount() > 0) {
+            tblQLDSSV.setRowSelectionInterval(vitri, vitri);
+            mouclick();
+
+        }
     }//GEN-LAST:event_btntangActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+int tron = JOptionPane.showConfirmDialog(this, "bạn có chắc chắn muốn thêm không ?", "thông báo!", JOptionPane.YES_NO_OPTION);
+        if (tron == 0) {
+            if (txtMasv.getText().trim().length() > 0 && txtDiemTA.getText().trim().length() > 0 && txtDiemTin.getText().trim().length() > 0 & txtGDTC.getText().trim().length() > 0) {
+                List<students> stuReponstory = new studentsReponstory().getallStudents();
+                boolean check = false;
+                int i;
+                for ( i= 0; i <stuReponstory.size() ; i++) {
+        if (stuReponstory.get(i).getMasv().equalsIgnoreCase(txtMasv.getText())) {
+             check = true;
+                   double diemta = Double.parseDouble(txtDiemTA.getText());
+   double diemtin = Double.parseDouble(txtDiemTin.getText());
+   double diemgdtc = Double.parseDouble(txtGDTC.getText());
+                grade gr = them();
+                gradeReponstory grReponstory = new gradeReponstory();
+                if (diemta <= 10 && diemtin <= 10 &&  diemgdtc<= 10) {
+                if (gradeReponstory.addGrade(gr) != null) {
 
-        int tron = JOptionPane.showConfirmDialog(this,"bạn có chắc chắn muốn thêm không ?" ,"thông báo!",JOptionPane.YES_NO_OPTION);
-        if(tron == 0){
-        if(txtMasv.getText().trim().length() > 0&&txtDiemTA.getText().trim().length() > 0&&txtDiemTin.getText().trim().length() > 0&txtGDTC.getText().trim().length() > 0){
-    grade gr = them();
-        gradeReponstory grReponstory = new gradeReponstory();
-        if (gradeReponstory.addGrade(gr) != null) {
-            if(txtDiemTA.getText().matches("0-9+")&&txtDiemTin.getText().matches("0-9+")&&txtGDTC.getText().matches("0-9+")){
-                JOptionPane.showMessageDialog(this, "thêm thành công");
-            }else{
-                return;
+                        JOptionPane.showMessageDialog(this, "thêm thành công");
+                        
+                             loatdata();
+                    } else {
+                         JOptionPane.showMessageDialog(this, "thêm thất bại");
+                    }
+
+                } else {
+                  JOptionPane.showMessageDialog(this, "điểm chỉ từ 0 - 10 không được nhập quá");
+                }
+              }}   if(check == false){
+                   JOptionPane.showMessageDialog(this, "chưa tồn tại mã sinh viên này");
+                   return;
+              }
+
+            } else {
+                JOptionPane.showMessageDialog(this, "làm ơn đừng để trống mà :((");
             }
             
-        } else {
-            JOptionPane.showMessageDialog(this, "thêm thất bại");
         }
-        loatdata();
-}else{
-    JOptionPane.showMessageDialog(this, "làm ơn đừng để trống mà :((");
-}
-        }
-
-        
     }//GEN-LAST:event_btnSaveActionPerformed
 
     /**
@@ -740,13 +797,15 @@ if(txtTimMaSv.getText().trim().length() > 0){
         grade g = new grade();
         g.setMasv(txtMasv.getText().trim());
         try {
-            g.setTienganh(Double.parseDouble(txtDiemTA.getText().trim()));
+            
+               g.setTienganh(Double.parseDouble(txtDiemTA.getText().trim()));
             g.setTinhoc(Double.parseDouble(txtDiemTin.getText().trim()));
-            g.setGdtc(Double.parseDouble(txtGDTC.getText().trim()));
+            g.setGdtc(Double.parseDouble(txtGDTC.getText().trim()));  
+             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "nhập số đi đừng nhập linh tinh mà :<");
             e.printStackTrace();
-            
+
         }
 
         return g;
@@ -767,4 +826,6 @@ if(txtTimMaSv.getText().trim().length() > 0){
         txtGDTC.setText(String.valueOf(grade.get(vitri).getGdtc()));
         lbiDiemTB.setText(String.valueOf(grade.get(vitri).getDiemtb()));
     }
+
+    
 }

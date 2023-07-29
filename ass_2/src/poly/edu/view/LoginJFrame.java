@@ -154,11 +154,13 @@ public class LoginJFrame extends javax.swing.JFrame {
                     check = true;
                     int vt = i;
                     if (dn.get(vt).getRole().equalsIgnoreCase("giang vien")) {
+                        JOptionPane.showMessageDialog(this, "bạn đã đăng nhập thành công ,bạn là giảng viên");
                         new QLDSVJFrame().setVisible(true);
                         setVisible(false);
                         break;
                     }
                     if (dn.get(vt).getRole().equalsIgnoreCase("phong ban")) {
+                        JOptionPane.showMessageDialog(this, "bạn đã đăng nhập thành công ,bạn là phòng ban");
                         new QLSVJFrame().setVisible(true);
                         setVisible(false);
                         break;
@@ -181,7 +183,6 @@ public class LoginJFrame extends javax.swing.JFrame {
             }
             if (!check) {
                 JOptionPane.showMessageDialog(this, "tài khoản hoặc mật khẩu sai vui lòng nhập lại");
-
             }
 
         }
@@ -192,7 +193,7 @@ public class LoginJFrame extends javax.swing.JFrame {
         int tron = JOptionPane.showConfirmDialog(this, "thoát", "bạn có muốn thoát hay không ?", JOptionPane.YES_NO_OPTION);
         if (tron == 0) {
             System.exit(0);
-            
+
         }
     }//GEN-LAST:event_btnCannelActionPerformed
 
