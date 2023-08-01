@@ -17,7 +17,7 @@ import poly.edu.untitity.jdbcheper;
  *
  * @author HP
  */
-public class gradeReponstory {
+public class gradeService {
 
     public List<grade> getallGrade() {
         List<grade> dsdiem = new ArrayList<>();
@@ -86,7 +86,7 @@ public class gradeReponstory {
     }
 
     public Integer DELETEgrade(grade gr) {
-        String spl = "EXEC XOA ?";
+        String spl = "Delete grade where masv =  ?";
         Integer row = jdbcheper.TruyVancapnhat(spl, gr.getMasv());
         return row;
     }

@@ -20,7 +20,7 @@ import poly.edu.untitity.jdbcheper;
  *
  * @author HP
  */
-public class studentsReponstory {
+public class studentsService {
     public  List<students> getallStudents(){
         List<students> dssv = new ArrayList<>();
         String sql = "SELECT * FROM STUDENTS ";

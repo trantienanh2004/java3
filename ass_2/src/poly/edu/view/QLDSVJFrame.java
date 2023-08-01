@@ -12,8 +12,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import poly.edu.model.grade;
 import poly.edu.model.students;
-import poly.edu.service.gradeReponstory;
-import poly.edu.service.studentsReponstory;
+import poly.edu.service.gradeService;
+import poly.edu.service.studentsService;
 import poly.edu.untitity.jdbcheper;
 
 /**
@@ -26,7 +26,7 @@ public class QLDSVJFrame extends javax.swing.JFrame {
     /**
      * Creates new form QLDSVJFrame
      */
-    gradeReponstory gradeReponstory = new gradeReponstory();
+    gradeService gradeReponstory = new gradeService();
     DefaultComboBoxModel<grade> modelCombo;
 
     public QLDSVJFrame() {
@@ -469,7 +469,7 @@ public class QLDSVJFrame extends javax.swing.JFrame {
         txtGDTC.setText("");
         lbiHoTen.setText("");
         lbiDiemTB.setText("0,0");
-   List<students> stuReponstory = new studentsReponstory().getallStudents();
+   List<students> stuReponstory = new studentsService().getallStudents();
         System.out.println(""+stuReponstory.size());
     }//GEN-LAST:event_btnNewActionPerformed
 
@@ -482,7 +482,7 @@ public class QLDSVJFrame extends javax.swing.JFrame {
                 if (row == -1) {
                     return;
                 }
-                List<students> stuReponstory = new studentsReponstory().getallStudents();
+                List<students> stuReponstory = new studentsService().getallStudents();
                 boolean check = false;
                 int i;
          for ( i= 0; i <stuReponstory.size() ; i++) {  
@@ -494,7 +494,7 @@ public class QLDSVJFrame extends javax.swing.JFrame {
    double diemta = Double.parseDouble(txtDiemTA.getText());
    double diemtin = Double.parseDouble(txtDiemTin.getText());
    double diemgdtc = Double.parseDouble(txtGDTC.getText());
-                gradeReponstory grReponstory = new gradeReponstory();
+                gradeService grReponstory = new gradeService();
                 
                     if (diemta <= 10 && diemtin<= 10 &&  diemgdtc<= 10) {
                      if (grReponstory.UpdateGrade(gra) != null) {   
@@ -527,12 +527,12 @@ public class QLDSVJFrame extends javax.swing.JFrame {
 
             return;
         }
-        int vtluatron = row + 1;
-        int tron = JOptionPane.showConfirmDialog(this, "bạn có chắc muốn xóa không" + "(vị trí : " + vtluatron + ")", "nhắc nhở !", JOptionPane.YES_NO_OPTION);
+        int vtluatron = (int) tblQLDSSV.getValueAt(0, 0);
+        int tron = JOptionPane.showConfirmDialog(this, "bạn có chắc muốn xóa không" + "(iD : " + vtluatron + ")", "nhắc nhở !", JOptionPane.YES_NO_OPTION);
         if (tron == 0) {
             grade g = them();
             
-            gradeReponstory grReponstory = new gradeReponstory();
+            gradeService grReponstory = new gradeService();
             if (grReponstory.DELETEgrade(g) != null) {
                 JOptionPane.showMessageDialog(this, "xóa thành công");
                   loatdata();
@@ -643,7 +643,7 @@ public class QLDSVJFrame extends javax.swing.JFrame {
 int tron = JOptionPane.showConfirmDialog(this, "bạn có chắc chắn muốn thêm không ?", "thông báo!", JOptionPane.YES_NO_OPTION);
         if (tron == 0) {
             if (txtMasv.getText().trim().length() > 0 && txtDiemTA.getText().trim().length() > 0 && txtDiemTin.getText().trim().length() > 0 & txtGDTC.getText().trim().length() > 0) {
-                List<students> stuReponstory = new studentsReponstory().getallStudents();
+                List<students> stuReponstory = new studentsService().getallStudents();
                 boolean check = false;
                 int i;
                 for ( i= 0; i <stuReponstory.size() ; i++) {
@@ -653,7 +653,7 @@ int tron = JOptionPane.showConfirmDialog(this, "bạn có chắc chắn muốn t
    double diemtin = Double.parseDouble(txtDiemTin.getText());
    double diemgdtc = Double.parseDouble(txtGDTC.getText());
                 grade gr = them();
-                gradeReponstory grReponstory = new gradeReponstory();
+                gradeService grReponstory = new gradeService();
                 if (diemta <= 10 && diemtin <= 10 &&  diemgdtc<= 10) {
                 if (gradeReponstory.addGrade(gr) != null) {
 

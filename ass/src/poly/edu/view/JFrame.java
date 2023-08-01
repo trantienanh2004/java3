@@ -16,13 +16,12 @@ import poly.edu.service.nganhservice;
  * @author HP
  */
 public class JFrame extends javax.swing.JFrame {
-    DefaultComboBoxModel<nganh> modelcbx =  new DefaultComboBoxModel<>();
+ 
    private final nganhservice nganhservice = new nganhservice();
     public JFrame() {
         initComponents();
         setLocationRelativeTo(null);
-        cbxnganh.setModel((DefaultComboBoxModel)modelcbx);
-        loatdata();
+
         dtm();
     }
 

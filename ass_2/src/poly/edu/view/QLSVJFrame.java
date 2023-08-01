@@ -14,8 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import poly.edu.model.grade;
 import poly.edu.model.students;
-import poly.edu.service.gradeReponstory;
-import poly.edu.service.studentsReponstory;
+import poly.edu.service.gradeService;
+import poly.edu.service.studentsService;
 
 /**
  *
@@ -26,7 +26,7 @@ public class QLSVJFrame extends javax.swing.JFrame {
     /**
      * Creates new form QLSVJFrame
      */
-    studentsReponstory students = new studentsReponstory();
+    studentsService students = new studentsService();
     DefaultComboBoxModel<students> modelcombo;
 
     public QLSVJFrame() {
@@ -395,6 +395,18 @@ public class QLSVJFrame extends javax.swing.JFrame {
 
         int tron = JOptionPane.showConfirmDialog(this, "bạn có chắc muốn update không", "nhắc nhở !", JOptionPane.YES_NO_OPTION);
         if (tron == 0) {
+            List<students> svv = students.getallStudents();
+            boolean checkma = false;
+            for (students object : svv) {
+                if (txtMaSV.getText().equalsIgnoreCase(object.getMasv())) {
+                    checkma = true;
+                }
+            }
+            if (checkma == false) {
+                JOptionPane.showMessageDialog(this, "mã chưa tồn tại để sửa");
+                return;
+            }
+
             System.out.println("" + txtDiaChi.getText().trim().length() + txtEmail.getText().trim().length() + txtHoTen.getText().trim().length() + txtSoDT.getText().trim().length() + txtMaSV.getText().trim().length());
             if (txtDiaChi.getText().trim().length() == 0 && txtEmail.getText().trim().length() == 0 && txtHoTen.getText().trim().length() == 0 && txtSoDT.getText().trim().length() == 0 && txtMaSV.getText().trim().length() == 0) {
                 JOptionPane.showMessageDialog(this, "nhập đầy đủ thông tin");
@@ -410,19 +422,22 @@ public class QLSVJFrame extends javax.swing.JFrame {
                 students sv = them();
                 String vt = vitricansua();
                 sv.setMasv(vt);
-                studentsReponstory studenReponstory = new studentsReponstory();
+                studentsService studenReponstory = new studentsService();
 
                 if (checksodt == false) {
                     if (studenReponstory.UPDATEQLSV(sv) != null) {
                         JOptionPane.showMessageDialog(this, "sửa thành công");
                         dtm();
-
+                        if (tblQLSV.getRowCount() > 0) {
+                            tblQLSV.setRowSelectionInterval(0, 0);
+                            dtm();
+                        }
                     } else {
                         JOptionPane.showMessageDialog(this, "sửa thất bại");
                         return;
                     }
                 } else {
-
+JOptionPane.showMessageDialog(this, "chỉ nhập số trong số điện thoại");
                     return;
                 }
             } else {
@@ -437,7 +452,7 @@ public class QLSVJFrame extends javax.swing.JFrame {
         if (tron == 0) {
 
             students sv = them();
-            studentsReponstory sReponstory = new studentsReponstory();
+            studentsService sReponstory = new studentsService();
             if (sReponstory.DELETESTUDENTS(sv) != null) {
                 JOptionPane.showMessageDialog(this, "xóa thành công");
                 dtm();
@@ -477,7 +492,7 @@ public class QLSVJFrame extends javax.swing.JFrame {
             if (txtDiaChi.getText().trim().length() > 0 && txtEmail.getText().trim().length() > 0 && txtHoTen.getText().trim().length() > 0 && txtSoDT.getText().trim().length() > 0 && txtMaSV.getText().trim().length() > 0) {
                 boolean check = false;
                 students sv = them();
-                studentsReponstory studenReponstory = new studentsReponstory();
+                studentsService studenReponstory = new studentsService();
                 int i;
                 for (i = 0; i < studenReponstory.getallStudents().size(); i++) {
 
@@ -634,7 +649,6 @@ public class QLSVJFrame extends javax.swing.JFrame {
             sv.setSodt(Integer.valueOf(txtSoDT.getText()));
         } catch (Exception e) {
             e.printStackTrace();
-
             checksodt = true;
         }
 

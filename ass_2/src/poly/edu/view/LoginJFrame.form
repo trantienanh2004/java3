@@ -41,7 +41,7 @@
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="38" max="32767" attributes="0"/>
+              <EmptySpace pref="30" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -75,8 +75,8 @@
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="btnCannel" linkSize="4" min="-2" pref="103" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="txtPassword" linkSize="2" min="-2" pref="247" max="-2" attributes="0"/>
-                      <Component id="txtUserName" linkSize="2" min="-2" pref="247" max="-2" attributes="0"/>
+                      <Component id="txtUserName" linkSize="6" pref="247" max="32767" attributes="0"/>
+                      <Component id="txtPassword" linkSize="6" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
               </Group>
@@ -88,14 +88,14 @@
                   <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtUserName" linkSize="3" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                      <Component id="txtUserName" linkSize="7" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtPassword" linkSize="7" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtPassword" linkSize="3" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="45" max="32767" attributes="0"/>
+                  <EmptySpace pref="50" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnLogin" linkSize="5" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
                       <Component id="btnCannel" linkSize="5" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
@@ -116,8 +116,6 @@
             <Property name="text" type="java.lang.String" value="Password"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtPassword">
-        </Component>
         <Component class="javax.swing.JTextField" name="txtUserName">
         </Component>
         <Component class="javax.swing.JButton" name="btnLogin">
@@ -135,6 +133,8 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCannelActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="txtPassword">
         </Component>
       </SubComponents>
     </Container>

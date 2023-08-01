@@ -19,7 +19,7 @@ import poly.edu.untitity.jdbcheper;
  *
  * @author HP
  */
-public class usersReponstory {
+public class usersService {
 
    public List<USERS> GetAllUsers(){
        List<USERS> dstk = new ArrayList<>();
@@ -34,7 +34,7 @@ public class usersReponstory {
                dstk.add(new USERS(pass , name , role));
            }
        } catch (SQLException ex) {
-           Logger.getLogger(usersReponstory.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(usersService.class.getName()).log(Level.SEVERE, null, ex);
        }
        return dstk;
    }
