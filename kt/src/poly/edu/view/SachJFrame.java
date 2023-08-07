@@ -16,9 +16,9 @@ import poly.edu.service.sachservice;
  * @author HP
  */
 public class SachJFrame extends javax.swing.JFrame {
-    ArrayList<sach> s = new ArrayList<>();
+    public final sachservice sachservice = new sachservice();
     
-    sachservice sachser = new sachservice();
+            
     
     /**
      * Creates new form SachJFrame
@@ -219,67 +219,33 @@ public class SachJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnclearActionPerformed
 
     private void btnthemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthemActionPerformed
-       if(txtmasach.getText().trim().length() < 0 ||txttensach.getText().trim().length() < 0 ||txtgiatien.getText().trim().length() < 0 ||txtsoluong.getText().trim().length() < 0  ){
-           JOptionPane.showMessageDialog(this, "không để trống");
-       }else{
-           try {
-                sach s = getsinhvienfrominput();
-           if (sachser.addsach(s)!=null) {
-               JOptionPane.showMessageDialog(this, "thêm thành công");
+sach s = laydulieu();
+           if(sachservice.addsach(s) != null){
+               JOptionPane.showMessageDialog(this, "them thanh cong");
                dtm();
            }else{
-               JOptionPane.showMessageDialog(this, "thêm thất bại");
+               JOptionPane.showMessageDialog(this, "thatbai ");
            }
-           } catch (Exception e) {
-               e.printStackTrace();
-           }
-          
-           
-       }
+       
     }//GEN-LAST:event_btnthemActionPerformed
 
     private void tblsachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblsachMouseClicked
       
-        try {
-            showd();
-        } catch (Exception e) {
-        }
-      
+        
     }//GEN-LAST:event_tblsachMouseClicked
 
     private void btnsuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsuaActionPerformed
-        if(txtmasach.getText().trim().length() < 0 ||txttensach.getText().trim().length() < 0 ||txtgiatien.getText().trim().length() < 0 ||txtsoluong.getText().trim().length() < 0  ){
-           JOptionPane.showMessageDialog(this, "không để trống");
-       }else{
-           try {
-                sach s = getsinhvienfrominput();
-           if (sachser.suasach(s)!=null) {
-               JOptionPane.showMessageDialog(this, "sửa thành công");
-               dtm();
-           }else{
-               JOptionPane.showMessageDialog(this, "sửa thất bại");
-           }
-           } catch (Exception e) {
-               e.printStackTrace();
-           }  
-       }
+ 
     }//GEN-LAST:event_btnsuaActionPerformed
 
     private void btnxoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxoaActionPerformed
-        // TODO add your handling code here:  if(txtmasach.getText().trim().length() < 0 ||txttensach.getText().trim().length() < 0 ||txtgiatien.getText().trim().length() < 0 ||txtsoluong.getText().trim().length() < 0  ){
-        
-           try {
-                sach s = getsinhvienfrominput();
-           if (sachser.xoasach(s)!=null) {
-               JOptionPane.showMessageDialog(this, "xóa thành công");
-               dtm();
-           }else{
-               JOptionPane.showMessageDialog(this, "xóa thất bại");
-           }
-           } catch (Exception e) {
-               e.printStackTrace();
-           }  
-       
+     String mas = txtmasach.getText();
+        if (sachservice.xoasach(mas) != null) {
+            JOptionPane.showMessageDialog(this, "xoa thanh cong ");
+            dtm();
+        }else{
+            JOptionPane.showMessageDialog(this, "xoa that bai");
+        }
         
     }//GEN-LAST:event_btnxoaActionPerformed
 
@@ -337,39 +303,31 @@ public class SachJFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void dtm() {
-        ArrayList<sach> S = sachser.getallsach();
         DefaultTableModel dtm = (DefaultTableModel) tblsach.getModel();
         dtm.setRowCount(0);
-        for (sach sach : S) {
+        for (sach object : sachservice.getallsach()) {
             Object [] obj ={
-              sach.getMasach(),
-                sach.getTensach(),
-                sach.getSoluong(),
-                sach.getGiatien(),
+                object.getMasach(),
+                object.getTensach(),
+                object.getSoluong(),
+                object.getGiatien(),
             };
-            dtm.addRow(obj);
+              dtm.addRow(obj);
         }
-    }
-    public sach getsinhvienfrominput(){
-        sach bok = new sach();
-        bok.setMasach(txtmasach.getText());
-        bok.setTensach(txttensach.getText());
-        try {
- bok.setSoluong(Integer.parseInt(txtmasach.getText()));
-        bok.setGiatien(Integer.parseInt(txtmasach.getText()));
-        } catch (Exception e) {
-        }
-     return bok;
+        
+        
+        
+      
     }
 
-    private void showd() {
-         int row = tblsach.getSelectedRow();
-       if(row == -1){
-           return ;
-       }
-       txtmasach.setText(tblsach.getValueAt(row, 0).toString());
-       txttensach.setText(tblsach.getValueAt(row, 1).toString());
-       txtsoluong.setText(tblsach.getValueAt(row, 2).toString());
-       txtgiatien.setText(tblsach.getValueAt(row, 3).toString());
+    private sach laydulieu() {
+        sach s = new sach();
+        s.setMasach(txtmasach.getText());
+        s.setTensach(txtmasach.getText());
+        s.setSoluong(Integer.valueOf(txtsoluong.getText()));
+        s.setGiatien(Integer.valueOf(txtgiatien.getText()));
+        return s;
     }
+
+  
 }

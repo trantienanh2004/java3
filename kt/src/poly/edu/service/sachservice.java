@@ -5,6 +5,7 @@
  */
 package poly.edu.service;
 
+import poly.edu.untitity.DB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,77 +17,58 @@ import poly.edu.model.sach;
  * @author HP
  */
 public class sachservice {
-    public ArrayList<sach> getallsach(){
-        ArrayList<sach> sach =  new ArrayList<>();
-        try {
-            String sql = "select * from sach";
-            Connection cn = DB.getConnection();
-            PreparedStatement pd = cn.prepareStatement(sql);
-            ResultSet rs = pd.executeQuery();
-            while(rs.next()){
-                sach s = new sach();
-                s.setMasach(rs.getString("MaSach"));
-                s.setTensach(rs.getString("TenSach"));
-                s.setSoluong(rs.getInt("Soluong"));
-                s.setGiatien(rs.getInt("GiaTien"));
-                sach.add(s);
-            }
-        } catch (Exception e) {
-        }
-        return sach;
-    }
-    
-    
-   public Integer addsach(sach sach){
-       Integer row = null;
-        ArrayList<sach> s =  new ArrayList<>();
-        try {
-            String sql = "insert into sach values(?,?,?,?)";
-            Connection cn = DB.getConnection();
-            PreparedStatement pd = cn.prepareStatement(sql);
-          pd.setString(1, "Masach");
-          pd.setString(2, "Tensach");
-          pd.setString(3, "soluong");
-          pd.setString(4, "giatien");
-      row =  pd.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-       return row;
-  }
-   public Integer suasach(sach sach){
-       Integer row = null;
-        ArrayList<sach> s =  new ArrayList<>();
-        try {
-            String sql = "update sach "
-                    + "set masach = ?,tensach = ?,soluong = ? , giatien = ?"
-                    + "where masach like ?"
-                    ;
-            Connection cn = DB.getConnection();
-            PreparedStatement pd = cn.prepareStatement(sql);
-          pd.setString(1, "Masach");
-          pd.setString(2, "Tensach");
-          pd.setString(3, "soluong");
-          pd.setString(4, "giatien");
-      row =  pd.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-       return row;
-  }
-   public Integer xoasach(sach sach){
-       Integer row = null;
-        ArrayList<sach> s =  new ArrayList<>();
-        try {
-            String sql = "delete from sach where = ?";
-            Connection cn = DB.getConnection();
-            PreparedStatement pd = cn.prepareStatement(sql);
-          pd.setString(1, "Masach");
-        
-      row =  pd.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-       return row;
-  }
+           public ArrayList<sach> getallsach(){
+               ArrayList<sach> dssach = new ArrayList<>();
+               Connection cn = DB.getConnection();
+               try {
+                   String sql ="select * from sach";
+                   PreparedStatement pd = cn.prepareStatement(sql);
+                   ResultSet rs = pd.executeQuery();
+                   while (rs.next()) {                       
+                       sach s = new sach();
+                       s.setMasach(rs.getString("masach"));
+                       s.setTensach(rs.getString("tensach"));
+                       s.setSoluong(rs.getInt("soluong"));
+                       s.setGiatien(rs.getInt("giatien"));
+                       dssach.add(s);
+                   }
+               } catch (Exception e) {
+                   e.printStackTrace();
+               }
+ return dssach;
+           }
+           public Integer addsach(sach s){
+               Integer row = null;
+               Connection cn = DB.getConnection();
+               try {
+                   String sql ="insert into sach (Masach,TenSach,SoLuong,Giatien) values"
+                           + " (?,?,?,?)";
+                   PreparedStatement pd = cn.prepareStatement(sql);
+                  pd.setString(1, s.getMasach());
+                  pd.setString(2, s.getTensach());
+                  pd.setInt(3, s.getSoluong());
+                  pd.setInt(4, s.getGiatien());
+                                      
+                     row = pd.executeUpdate();
+               } catch (Exception e) {
+                   e.printStackTrace();
+               }
+ return row;
+           }
+           public Integer xoasach(String s){
+             Integer row = null;
+               Connection cn = DB.getConnection();
+               try {
+                   String sql ="delete sach where masach = ? ";
+                          
+                   PreparedStatement pd = cn.prepareStatement(sql);
+                  pd.setString(1, s);
+                 
+                                      
+                    row  = pd.executeUpdate();
+               } catch (Exception e) {
+                   e.printStackTrace();
+               }
+ return row;
+           }
 }

@@ -90,5 +90,30 @@ public class gradeService {
         Integer row = jdbcheper.TruyVancapnhat(spl, gr.getMasv());
         return row;
     }
-    
+    public List<grade> getallGradee() {
+        List<grade> dsdiem1 = new ArrayList<>();
+        String sql = "SELECT id ,students.MASV, HOTEN,TIENGANH,TINHOC,GDTC,SUM((TIENGANH+TINHOC+GDTC)/3) AS TB\n" +
+" FROM GRADE join STUDENTS on students.masv = GRADE.masv\n"
+                + "where hoten = null or tinhoc = null or gdtc = null" +
+ 
+"GROUP BY ID,students.MASV, HOTEN,TIENGANH,TINHOC,GDTC";
+        ResultSet rs = jdbcheper.TruyVan(sql);
+        try {
+            while (rs.next()) {
+                grade g = new grade();
+                int id = rs.getInt("id");
+                String hoten = rs.getString("hoten");
+                String masv = rs.getString("masv");
+                double tienganh = rs.getDouble("tienganh");
+                double tinhoc = rs.getDouble("tinhoc");
+                double gdtc = rs.getDouble("GDTC"); 
+                double diemtb = rs.getDouble("TB");
+                dsdiem1.add(new grade(id, hoten, masv, tienganh, tinhoc, gdtc, diemtb));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return dsdiem1;
+    }
 }

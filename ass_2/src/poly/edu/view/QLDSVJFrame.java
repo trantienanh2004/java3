@@ -547,9 +547,12 @@ public class QLDSVJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+int tron = JOptionPane.showConfirmDialog(this, "bạn có muốn đăng xuất không ?", "thông báo", JOptionPane.YES_NO_OPTION);
+if(tron == 0){
         new LoginJFrame().setVisible(true);
         setVisible(false);
         JOptionPane.showMessageDialog(this, "đăng xuất thành công !");
+}
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -557,7 +560,7 @@ public class QLDSVJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void btnMaSvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMaSvActionPerformed
-        List<grade> g = gradeReponstory.getallGrade();
+        List<grade> g = gradeReponstory.getallGradee();
         if (txtTimMaSv.getText().trim().length() > 0) {
 
             boolean check = false;
@@ -574,7 +577,7 @@ public class QLDSVJFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "nhập vào đi cô ơiiii");
         }
 //        if(txtTimMaSv.getText().equalsIgnoreCase(g.get(i).getMasv())){
-//         System.out.println("đúng"+g.get(i).getHoTen());
+//         System.out.println("đúng"+g.get(i).getMasv());
 //       }else{
 //        System.out.println("sai"+g.get(i).getHoTen());
 //       }
