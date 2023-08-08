@@ -92,11 +92,10 @@ public class gradeService {
     }
     public List<grade> getallGradee() {
         List<grade> dsdiem1 = new ArrayList<>();
-        String sql = "SELECT id ,students.MASV, HOTEN,TIENGANH,TINHOC,GDTC,SUM((TIENGANH+TINHOC+GDTC)/3) AS TB\n" +
-" FROM GRADE join STUDENTS on students.masv = GRADE.masv\n"
-                + "where hoten = null or tinhoc = null or gdtc = null" +
- 
-"GROUP BY ID,students.MASV, HOTEN,TIENGANH,TINHOC,GDTC";
+        String sql = "SELECT grade.id ,students.MASV, HOTEN,TIENGANH,TINHOC,GDTC,SUM((TIENGANH+TINHOC+GDTC)/3) AS TB\n" +
+" FROM GRADE join STUDENTS on students.masv = GRADE.masv\n"+
+   
+"GROUP BY grade.ID,students.MASV, HOTEN,TIENGANH,TINHOC,GDTC";
         ResultSet rs = jdbcheper.TruyVan(sql);
         try {
             while (rs.next()) {
