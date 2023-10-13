@@ -7,6 +7,7 @@ package poly.edu.view;
 
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
+
 import javax.swing.Timer;
 
 /**
@@ -25,8 +26,9 @@ Timer t;
          t = new Timer(2000, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               pbtiendo.setValue(pbtiendo.getValue()+1 > 100 ? 0 :pbtiendo.getValue() + 40);
-                if(pbtiendo.getValue() > 99){
+               pbtiendo.setValue(pbtiendo.getValue()+1 >= 100 ? 0 :pbtiendo.getValue() + 40);
+           
+                if(pbtiendo.getValue() > 80){
                     t.stop();
             new LoginJFrame().setVisible(true);
             setVisible(false);

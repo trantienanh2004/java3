@@ -7,7 +7,7 @@ package poly.edu.view;
 
 import java.util.ArrayList;
 import java.util.List;
-import javafx.scene.shape.SVGPath;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
