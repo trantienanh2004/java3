@@ -321,9 +321,9 @@ sach s = laydulieu();
     }
 
     private sach laydulieu() {
-        sach s = new sach();
-        s.setMasach(txtmasach.getText());
-        s.setTensach(txtmasach.getText());
+        sach s = new sach(); 
+       s.setMasach(txtmasach.getText());
+        s.setTensach(txttensach.getText());
         s.setSoluong(Integer.valueOf(txtsoluong.getText()));
         s.setGiatien(Integer.valueOf(txtgiatien.getText()));
         return s;
